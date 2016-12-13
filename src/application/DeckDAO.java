@@ -11,9 +11,9 @@ public class DeckDAO {
 	//*******************************
 	//SELECT a deck
 	//*******************************
-	public static Deck searchEmployee (String empId) throws SQLException, ClassNotFoundException {
+	public static Deck searchDeck (String deckId) throws SQLException, ClassNotFoundException {
 		//Declare a SELECT statement
-		String selectStmt = "SELECT * FROM Deck WHERE employee_id="+empId;
+		String selectStmt = "SELECT * FROM Deck WHERE employee_id="+deckId;
 
 		//Execute SELECT statement
 		try {
@@ -26,7 +26,7 @@ public class DeckDAO {
 			//Return employee object
 			return employee;
 		} catch (SQLException e) {
-			System.out.println("While searching an employee with " + empId + " id, an error occurred: " + e);
+			System.out.println("While searching a deck with " + deckId + " id, an error occurred: " + e);
 			//Return exception
 			throw e;
 		}
@@ -51,18 +51,18 @@ public class DeckDAO {
     //*******************************
     public static ObservableList<Deck> searchEmployees () throws SQLException, ClassNotFoundException {
         //Declare a SELECT statement
-        String selectStmt = "SELECT * FROM deck";
+        String selectStmt = "SELECT * FROM Deck";
 
         //Execute SELECT statement
         try {
             //Get ResultSet from dbExecuteQuery method
-            ResultSet rsEmps = DBUtil.dbExecuteQuery(selectStmt);
+            ResultSet rsDecks = DBUtil.dbExecuteQuery(selectStmt);
 
             //Send ResultSet to the getEmployeeList method and get employee object
-            ObservableList<Deck> empList = getDeckList(rsEmps);
+            ObservableList<Deck> deckList = getDeckList(rsDecks);
 
             //Return employee object
-            return empList;
+            return deckList;
         } catch (SQLException e) {
             System.out.println("SQL select operation has been failed: " + e);
             //Return exception
