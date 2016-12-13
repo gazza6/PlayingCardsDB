@@ -10,14 +10,14 @@ public class Connect {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");  
 			Connection conn=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/cards","root","root");  
+					"jdbc:mysql://localhost:3306/Cards","root","root");  
 			System.out.println("connected");
 			Statement stmt = conn.createStatement();
-			String sql = "Insert into deck (Name, Price, Winner, Conditions) Values ('ss', 100, 'aa(50)', 'New')";
-			stmt.executeUpdate(sql);
+//			String sql = "Insert into deck (Name, Price, Winner, Conditions) Values ('ss', 100, 'aa(50)', 'New')";
+//			stmt.executeUpdate(sql);
 			System.out.println("Added");
 			
-			ResultSet rs = stmt.executeQuery("SELECT * FROM deck");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM Deck");
 			 
 			conn.close();
 		} catch (Exception e) {

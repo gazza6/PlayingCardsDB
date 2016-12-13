@@ -1,46 +1,80 @@
 package application;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Deck {
-	
-	private String name;
-	private int price;
-	private String winner;
-	private String date; 
-	private List<Offer> offers = new ArrayList<Offer>();
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	public String getWinner() {
-		return winner;
-	}
-	public void setWinner(String winner) {
-		this.winner = winner;
-	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public List<Offer> getOffers() {
-		return offers;
-	}
-	public void setOffers(List<Offer> offers) {
-		this.offers = offers;
+
+	private IntegerProperty id;
+	private StringProperty name;
+	private IntegerProperty winningOffer;
+	private StringProperty condition;
+	private Blob image;
+
+	public Deck(){
+		this.id = new SimpleIntegerProperty();
+		this.name = new SimpleStringProperty();
+		this.winningOffer = new SimpleIntegerProperty();
+		this.condition = new SimpleStringProperty();
 	}
 
+	// id
+	public int getId() {
+		return id.get();
+	}
+	public void setId(int id) {
+		this.id.set(id);;
+	}
+	public IntegerProperty idProperty(){
+		return id;
+	}
+
+	// name
+	public String getName() {
+		return name.get();
+	}
+	public void setName(String name) {
+		this.name.set(name);;
+	}
+	public StringProperty nameProperty(){
+		return name;
+	}
 	
+	// winningOffer
+	public int getWinningOffer() {
+		return winningOffer.get();
+	}
+	public void setWinningOffer(int winningOffer) {
+		this.winningOffer.set(winningOffer);;
+	}
+	public IntegerProperty winningOfferProperty(){
+		return winningOffer;
+	}
+	
+	// condition
+	public String getCondition() {
+		return condition.get();
+	}
+	public void setCondition(String condition) {
+		this.condition.set(condition);
+	}
+	public StringProperty conditionProperty(){
+		return condition;
+	}
+
+	// image
+	public Blob getImage() {
+		return image;
+	}
+
+	public void setImage(Blob image) {
+		this.image = image;
+	}
+
 }
