@@ -1,11 +1,13 @@
 package application;
 
 import java.sql.Blob;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -15,13 +17,15 @@ public class Deck {
 	private StringProperty name;
 	private IntegerProperty winningOffer;
 	private StringProperty condition;
-	private Blob image;
+	private SimpleObjectProperty<Blob> image;
+	private StringProperty remark;
 
 	public Deck(){
 		this.id = new SimpleIntegerProperty();
 		this.name = new SimpleStringProperty();
 		this.winningOffer = new SimpleIntegerProperty();
 		this.condition = new SimpleStringProperty();
+		this.remark = new SimpleStringProperty();
 	}
 
 	// id
@@ -45,7 +49,7 @@ public class Deck {
 	public StringProperty nameProperty(){
 		return name;
 	}
-	
+
 	// winningOffer
 	public int getWinningOffer() {
 		return winningOffer.get();
@@ -56,7 +60,7 @@ public class Deck {
 	public IntegerProperty winningOfferProperty(){
 		return winningOffer;
 	}
-	
+
 	// condition
 	public String getCondition() {
 		return condition.get();
@@ -69,12 +73,26 @@ public class Deck {
 	}
 
 	// image
-	public Blob getImage() {
-		return image;
+	public Object getImage() {
+		return image.get();
 	}
 
 	public void setImage(Blob image) {
-		this.image = image;
+		this.image.set(image);
 	}
+	
+	public SimpleObjectProperty<Blob> imageProperty() {
+        return image;
+    }
 
+	// condition
+	public String getRemark() {
+		return remark.get();
+	}
+	public void setRemark(String remark) {
+		this.remark.set(remark);
+	}
+	public StringProperty remarkProperty(){
+		return remark;
+	}
 }

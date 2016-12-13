@@ -87,6 +87,30 @@ public class DeckDAO {
 		//return empList (ObservableList of Employees)
 		return deckList;
 	}
+	
+	//*************************************
+    //INSERT a deck with no winning bid
+    //*************************************
+    public static void insertDeck (String name, String condition) throws SQLException, ClassNotFoundException {
+        //Declare a INSERT statement
+    	
+    	// To do 
+    	
+        String updateStmt =
+                "BEGIN\n" +
+                        "INSERT INTO deck\n" +
+                        "(Name, condition)\n" +
+                        "VALUES\n" +
+                        "(sequence_employee.nextval, '"+name+"', '"+condition+"', 'IT_PROG');\n" +
+                        "END;";
+
+        //Execute DELETE operation
+        try {
+            DBUtil.dbExecuteUpdate(updateStmt);
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 
 
 }
