@@ -7,23 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NewBidderController">
    <children>
-      <MenuBar layoutY="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <menus>
-            <Menu mnemonicParsing="false" text="Back" />
-            <Menu mnemonicParsing="false" text="Add">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="New Deck" />
-                  <MenuItem mnemonicParsing="false" text="New Offer" />
-                  <MenuItem mnemonicParsing="false" text="New Bidder" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Search" />
-         </menus>
-      </MenuBar>
-      <Label layoutX="308.0" layoutY="69.0" prefWidth="300.0" text="New Bidder" AnchorPane.leftAnchor="308.0">
+      <Label alignment="CENTER" layoutX="200.0" layoutY="26.0" prefWidth="300.0" text="New Bidder" AnchorPane.leftAnchor="200.0">
          <font>
             <Font name="Arial" size="35.0" />
          </font>
@@ -31,7 +17,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </Label>
-      <Label layoutX="231.0" layoutY="175.0" text="Name">
+      <Label layoutX="232.0" layoutY="151.0" text="Name">
          <font>
             <Font size="20.0" />
          </font>
@@ -39,7 +25,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </Label>
-      <Label layoutX="231.0" layoutY="294.0" text="Remark">
+      <Label layoutX="230.0" layoutY="260.0" text="Remark">
          <font>
             <Font size="20.0" />
          </font>
@@ -47,8 +33,8 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </Label>
-      <TextField layoutX="231.0" layoutY="227.0" />
-      <Button layoutX="476.0" layoutY="611.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Add">
+      <TextField fx:id="nameText" layoutX="230.0" layoutY="203.0" />
+      <Button fx:id="addButton" layoutX="460.0" layoutY="571.0" mnemonicParsing="false" onAction="#addBidder" prefHeight="40.0" prefWidth="80.0" text="Add">
          <font>
             <Font size="20.0" />
          </font>
@@ -56,7 +42,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </Button>
-      <Button layoutX="224.0" layoutY="611.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Cancel">
+      <Button fx:id="clearButton" layoutX="160.0" layoutY="571.0" mnemonicParsing="false" onAction="#clearInfo" prefHeight="40.0" prefWidth="80.0" text="Clear">
          <font>
             <Font size="20.0" />
          </font>
@@ -64,6 +50,11 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </Button>
-      <TextArea layoutX="231.0" layoutY="350.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextArea fx:id="remarkText" layoutX="232.0" layoutY="309.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label fx:id="messageLabel" layoutX="200.0" layoutY="103.0" prefWidth="300.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

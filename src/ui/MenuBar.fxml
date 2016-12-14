@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<MenuBar prefHeight="30.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MenuBarController">
+   <menus>
+      <Menu mnemonicParsing="false" onAction="#switchToIndex" text="Back">
+         <items>
+            <MenuItem fx:id="back" mnemonicParsing="false" onAction="#switchToIndex" text="Index" />
+         </items></Menu>
+      <Menu mnemonicParsing="false" text="Add">
+         <items>
+            <MenuItem mnemonicParsing="false" text="New Deck" />
+            <MenuItem mnemonicParsing="false" text="New Offer" />
+            <MenuItem fx:id="addBidder" mnemonicParsing="false" onAction="#switchToAddBidder" text="New Bidder" />
+         </items>
+      </Menu>
+      <Menu mnemonicParsing="false" text="View">
+         <items>
+            <MenuItem mnemonicParsing="false" text="Decks" />
+            <MenuItem mnemonicParsing="false" text="Offers" />
+            <MenuItem mnemonicParsing="false" text="Bidders" />
+         </items>
+      </Menu>
+   </menus>
+</MenuBar>
