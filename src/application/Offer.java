@@ -10,9 +10,11 @@ public class Offer {
 
 	private IntegerProperty id;
 	private IntegerProperty bidderID;
-	private SimpleObjectProperty<Date> date;
 	private StringProperty price;
 	private IntegerProperty deckID;
+	private SimpleObjectProperty<Date> date;
 	private StringProperty remark;
+	
+	
 	
 }
