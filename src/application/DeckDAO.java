@@ -18,13 +18,13 @@ public class DeckDAO {
 		//Execute SELECT statement
 		try {
 			//Get ResultSet from dbExecuteQuery method
-			ResultSet rsEmp = DBUtil.dbExecuteQuery(selectStmt);
+			ResultSet rsDeck = DBUtil.dbExecuteQuery(selectStmt);
 
 			//Send ResultSet to the getEmployeeFromResultSet method and get employee object
-			Deck employee = getDeckFromResultSet(rsEmp);
+			Deck deck = getDeckFromResultSet(rsDeck);
 
 			//Return employee object
-			return employee;
+			return deck;
 		} catch (SQLException e) {
 			System.out.println("While searching a deck with " + deckId + " id, an error occurred: " + e);
 			//Return exception
@@ -139,18 +139,20 @@ public class DeckDAO {
 	//*************************************
 	//Update a deck
 	//*************************************
-	public static void updateDeck (String name,String winningOffer, String condition, String remark) throws SQLException, ClassNotFoundException {
+	public static void updateDeck (String id, String name,String winningOffer, String condition, String remark) throws SQLException, ClassNotFoundException {
 		//Declare a INSERT statement
 
 		// To do 
 
 		String updateStmt =
 				"BEGIN\n" +
-						"INSERT INTO Deck\n" +
-						"(Name, winningOffer, condition, remark)\n" +
-						"VALUES\n" +
-						"('"+name+"', '"+winningOffer+"','"+condition+"', '"+remark+"');\n" +
-						"END;";
+						"UPDATE Deck\n" +
+						"SET Name = '" + name + "', WinningOffer = '"+ winningOffer+ 
+						"', Condition = '"+ condition+ 
+						"', Remark = '"+ remark+ "'\n" +
+						"    WHERE ID = " + id + ";\n" +
+                        "   COMMIT;\n" +
+                        "END;";
 
 		//Execute DELETE operation
 		try {
