@@ -91,16 +91,16 @@ public class BidderDAO {
     public static void insertBidder (String name, String remark) throws SQLException, ClassNotFoundException {
         //Declare a DELETE statement
         String updateStmt =
-                "BEGIN\n" +
                         "INSERT INTO Bidder\n" +
                         "(Name, Remark)\n" +
                         "VALUES\n" +
-                        "('"+name+"', '"+remark+"');\n" +
-                        "END;";
+                        "('"+name+"', '"+remark+"')";
+                     
  
         //Execute DELETE operation
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
+            System.out.println("New bidder added successfully!");
         } catch (SQLException e) {
             System.out.print("Error occurred while INSERT Operation: " + e);
             throw e;

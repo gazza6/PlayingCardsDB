@@ -39,7 +39,7 @@ public class NewBidderController {
 	private void addBidder (ActionEvent actionEvent) throws ClassNotFoundException, SQLException {
 		try {
 			BidderDAO.insertBidder(nameText.getText(),remarkText.getText());
-			messageLabel.setText("New bidder added successfully!");
+			messageLabel.setText("New bidder added!");
 			nameText.setText("");
 			remarkText.setText("");
 		} catch (SQLException e) {
