@@ -48,7 +48,7 @@ public class NewBidderController {
 		}
 	}
 
-	//add a new bidder
+	// clear the fields
 	@FXML
 	private void clearInfo (ActionEvent actionEvent) throws ClassNotFoundException, SQLException {
 		nameText.setText("");

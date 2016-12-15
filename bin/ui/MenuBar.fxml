@@ -9,7 +9,7 @@
    <menus>
       <Menu mnemonicParsing="false" onAction="#switchToIndex" text="Back">
          <items>
-            <MenuItem fx:id="back" mnemonicParsing="false" text="Index" />
+            <MenuItem fx:id="back" mnemonicParsing="false" onAction="#switchToIndex" text="Index" />
          </items></Menu>
       <Menu mnemonicParsing="false" text="Add">
          <items>

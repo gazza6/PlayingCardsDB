@@ -43,6 +43,28 @@ public class BidderDAO {
 		return bidder;
 	}
 	
+	public static Bidder searchBidderName (String name) throws SQLException, ClassNotFoundException {
+		//Declare a SELECT statement
+		String selectStmt = "SELECT * FROM Bidder WHERE Name="+name;
+
+		//Execute SELECT statement
+		try {
+			//Get ResultSet from dbExecuteQuery method
+			ResultSet rsEmp = DBUtil.dbExecuteQuery(selectStmt);
+
+			//Send ResultSet to the getEmployeeFromResultSet method and get employee object
+			Bidder bidder = getBidderFromResultSet(rsEmp);
+
+			//Return employee object
+			return bidder;
+			
+		} catch (SQLException e) {
+			System.out.println("While searching a bidder with " + name + " id, an error occurred: " + e);
+			//Return exception
+			throw e;
+		}
+	}
+	
 	//*******************************
     //SELECT Bidders
     //*******************************

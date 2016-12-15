@@ -40,7 +40,7 @@ public class DeckDAO {
 			deck = new Deck();
 			deck.setId(rs.getInt("ID"));
 			deck.setName(rs.getString("Name"));
-			//deck.setWinningOffer(rs.getInt("WinningOffer"));
+			deck.setWinningOffer(rs.getInt("WinningOffer"));
 			deck.setCondition(rs.getInt("Condition"));
 		}
 		return deck;
@@ -79,7 +79,7 @@ public class DeckDAO {
 			Deck deck = new Deck();
 			deck.setId(rs.getInt("ID"));
 			deck.setName(rs.getString("Name"));
-			//deck.setWinningOffer(rs.getInt("WinningOffer"));
+			deck.setWinningOffer(rs.getInt("WinningOffer"));
 			deck.setCondition(rs.getInt("Condition"));
 			//Add employee to the ObservableList
 			deckList.add(deck);
@@ -97,12 +97,10 @@ public class DeckDAO {
 		// To do 
 
 		String updateStmt =
-				"BEGIN\n" +
 						"INSERT INTO Deck\n" +
 						"(Name, condition, remark)\n" +
 						"VALUES\n" +
-						"('"+name+"', '"+condition+"', '"+remark+"');\n" +
-						"END;";
+						"('"+name+"', '"+condition+"', '"+remark+")";
 
 		//Execute DELETE operation
 		try {
@@ -121,12 +119,9 @@ public class DeckDAO {
 		// To do 
 
 		String updateStmt =
-				"BEGIN\n" +
 						"UPDATE Deck\n" +
 						"SET WinningOffer = '" + winningOffer + "'\n" +
-						"WHERE ID = " + id + ";\n" +
-						"   COMMIT;\n" +
-						"END;";
+						"WHERE ID = " + id;
 
 		//Execute DELETE operation
 		try {

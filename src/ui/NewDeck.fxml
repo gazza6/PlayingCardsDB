@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NewDeckController">
+   <children>
+      <Label layoutX="76.0" layoutY="88.0" text="Deck Name" AnchorPane.leftAnchor="75.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="225.0" text="Condition" AnchorPane.leftAnchor="75.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="306.0" text="Price" AnchorPane.leftAnchor="75.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="78.0" layoutY="496.0" text="Date">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="407.0" text="Bidder Name" AnchorPane.leftAnchor="75.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="425.0" layoutY="296.0" text="Remark" AnchorPane.rightAnchor="214.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="priceText" layoutX="75.0" layoutY="349.0" AnchorPane.leftAnchor="75.0" />
+      <TextArea fx:id="remarkText" layoutX="369.0" layoutY="343.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="75.0" />
+      <ComboBox fx:id="deckCombo" layoutX="76.0" layoutY="129.0" prefWidth="150.0" AnchorPane.leftAnchor="75.0" />
+      <DatePicker fx:id="datePicker" layoutX="75.0" layoutY="543.0" AnchorPane.leftAnchor="75.0" />
+      <Label layoutX="271.0" layoutY="26.0" text="New Deck">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <TextField fx:id="bidderText" layoutX="75.0" layoutY="447.0" AnchorPane.leftAnchor="75.0" />
+      <Button fx:id="addButton" layoutX="516.0" layoutY="609.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Add" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="150.0" />
+      <Button fx:id="clearButton" layoutX="151.0" layoutY="609.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Clear" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="150.0" />
+      <Label layoutX="409.0" layoutY="88.0" text="Image">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="deckText" layoutX="75.0" layoutY="179.0" />
+      <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="415.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
+      <ComboBox fx:id="conditionCombo" layoutX="75.0" layoutY="268.0" prefWidth="150.0" promptText="5 - Newest" />
+   </children>
+</AnchorPane>

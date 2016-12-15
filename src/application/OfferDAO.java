@@ -12,7 +12,7 @@ public class OfferDAO {
 	//*******************************
 	//SELECT a deck
 	//*******************************
-	public static Offer searchDeck (String offerId) throws SQLException, ClassNotFoundException {
+	public static Offer searchOffer (String offerId) throws SQLException, ClassNotFoundException {
 		//Declare a SELECT statement
 		String selectStmt = "SELECT * FROM Offer WHERE ID="+offerId;
 
@@ -97,15 +97,11 @@ public class OfferDAO {
 	public static void insertOffer (String bidderID, String price, String deckID, String Date, String remark) throws SQLException, ClassNotFoundException {
 		//Declare a INSERT statement
 
-		// To do 
-
 		String updateStmt =
-				"BEGIN\n" +
-						"INSERT INTO Offer\n" +
-						"(BidderID, Price, DeckID, Date, remark)\n" +
+				"INSERT INTO Offer\n" +
+						"(BidderID, Price, DeckID, Date, Remark)\n" +
 						"VALUES\n" +
-						"('"+bidderID+"','"+price+"','"+deckID+"', '"+Date+"', '"+remark+"');\n" +
-						"END;";
+						"('"+bidderID+"','"+price+"','"+deckID+"', '"+Date+"', '"+remark+"')";
 
 		//Execute INSERT operation
 		try {
@@ -114,32 +110,32 @@ public class OfferDAO {
 			throw e;
 		}
 	}
-	
+
 	//*************************************
-		//Update an offer
-		//*************************************
-		public static void updateOffer (String id, String bidderID, String price, String deckID, String date, String remark) throws SQLException, ClassNotFoundException {
-			//Declare a INSERT statement
+	//Update an offer
+	//*************************************
+	public static void updateOffer (String id, String bidderID, String price, String deckID, String date, String remark) throws SQLException, ClassNotFoundException {
+		//Declare a INSERT statement
 
-			// To do 
+		// To do 
 
-			String updateStmt =
-					"BEGIN\n" +
-							"UPDATE Offer\n" +
-							"SET BidderID = '" + bidderID + "', Price = '"+ price+ 
-							"', DeckID = '"+ deckID+ 
-							"', Date = '"+ date + 
-							"', Remark = '"+ remark+ "'\n" +
-							"    WHERE ID = " + id + ";\n" +
-	                        "   COMMIT;\n" +
-	                        "END;";
+		String updateStmt =
+				"BEGIN\n" +
+						"UPDATE Offer\n" +
+						"SET BidderID = '" + bidderID + "', Price = '"+ price+ 
+						"', DeckID = '"+ deckID+ 
+						"', Date = '"+ date + 
+						"', Remark = '"+ remark+ "'\n" +
+						"    WHERE ID = " + id + ";\n" +
+						"   COMMIT;\n" +
+						"END;";
 
-			//Execute DELETE operation
-			try {
-				DBUtil.dbExecuteUpdate(updateStmt);
-			} catch (SQLException e) {
-				throw e;
-			}
+		//Execute DELETE operation
+		try {
+			DBUtil.dbExecuteUpdate(updateStmt);
+		} catch (SQLException e) {
+			throw e;
 		}
+	}
 
 }
