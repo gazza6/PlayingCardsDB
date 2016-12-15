@@ -87,6 +87,33 @@ public class DeckDAO {
 		//return empList (ObservableList of Employees)
 		return deckList;
 	}
+	
+	//*************************************
+		//Update a deck
+		//*************************************
+		public static Deck latesetDeck () throws SQLException, ClassNotFoundException {
+			//Declare a INSERT statement
+
+			String selectStmt =
+							"SELECT * FROM Deck ORDER BY ID DESC LIMIT 0, 1";
+
+			//Execute SELECT statement
+			try {
+				//Get ResultSet from dbExecuteQuery method
+				ResultSet rsDeck = DBUtil.dbExecuteQuery(selectStmt);
+
+				//Send ResultSet to the getEmployeeFromResultSet method and get employee object
+				Deck deck = getDeckFromResultSet(rsDeck);
+
+				//Return employee object
+				return deck;
+				
+			} catch (SQLException e) {
+				System.out.println("While searching for lastest deck inserted, an error occurred: " + e);
+				//Return exception
+				throw e;
+			}
+		}
 
 	//*************************************
 	//INSERT a deck with no winning bid
@@ -97,7 +124,7 @@ public class DeckDAO {
 		// To do 
 
 		String updateStmt =
-						"INSERT INTO Deck\n" +
+				"INSERT INTO Deck\n" +
 						"(Name, condition, remark)\n" +
 						"VALUES\n" +
 						"('"+name+"', '"+condition+"', '"+remark+")";
@@ -119,7 +146,7 @@ public class DeckDAO {
 		// To do 
 
 		String updateStmt =
-						"UPDATE Deck\n" +
+				"UPDATE Deck\n" +
 						"SET WinningOffer = '" + winningOffer + "'\n" +
 						"WHERE ID = " + id;
 
@@ -146,8 +173,8 @@ public class DeckDAO {
 						"', Condition = '"+ condition+ 
 						"', Remark = '"+ remark+ "'\n" +
 						"    WHERE ID = " + id + ";\n" +
-                        "   COMMIT;\n" +
-                        "END;";
+						"   COMMIT;\n" +
+						"END;";
 
 		//Execute DELETE operation
 		try {

@@ -2,8 +2,11 @@ package ui;
 
 import java.sql.SQLException;
 
+import application.Bidder;
 import application.BidderDAO;
+import application.Deck;
 import application.DeckDAO;
+import application.Offer;
 import application.OfferDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -68,11 +71,25 @@ public class NewDeckController {
 				
 				// search bidder name if do not exist, then create a new one
 				
+				Bidder bidder = BidderDAO.searchBidderName(bidderText.getText());
+				if(bidder == null){
+					BidderDAO.insertBidder(bidderText.getText(),"");
+					bidder = BidderDAO.searchBidderName(bidderText.getText());
+				} 
+				
+				String bidderID = String.valueOf(bidder.getId());
+				
 				// look for the last inserted deck, and get its deckID
 				
-				//OfferDAO.insertOffer(bidderID, priceText.getText(), deckID, datePicker.getValue(), remarkText.getText());
+				Deck deck = DeckDAO.latesetDeck();
+				String deckID = String.valueOf(deck.getId());
+				
+				OfferDAO.insertOffer(bidderID, priceText.getText(), deckID, datePicker.getValue().toString(), remarkText.getText());
 				
 				// add the offerID back to the deck
+				
+				Offer offer = OfferDAO.latesetOffer();
+				DeckDAO.updateDeckWinningOffer(deckID, String.valueOf(offer.getId()));
 				
 				messageLabel.setText("New bidder added!");
 				clearFields();

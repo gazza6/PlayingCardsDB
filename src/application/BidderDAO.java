@@ -43,7 +43,7 @@ public class BidderDAO {
 		return bidder;
 	}
 	
-	public static Bidder searchBidderName (String name) throws SQLException, ClassNotFoundException {
+	public static Bidder searchBidderName(String name) throws SQLException, ClassNotFoundException {
 		//Declare a SELECT statement
 		String selectStmt = "SELECT * FROM Bidder WHERE Name="+name;
 

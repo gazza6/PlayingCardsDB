@@ -90,6 +90,27 @@ public class OfferDAO {
 		//return empList (ObservableList of Employees)
 		return offerList;
 	}
+	
+	public static Offer latesetOffer () throws SQLException, ClassNotFoundException {
+		//Declare a SELECT statement
+		String selectStmt = "SELECT * FROM Offer ORDER BY ID DESC LIMIT 0, 1";
+
+		//Execute SELECT statement
+		try {
+			//Get ResultSet from dbExecuteQuery method
+			ResultSet rsOffer = DBUtil.dbExecuteQuery(selectStmt);
+
+			//Send ResultSet to the getEmployeeFromResultSet method and get employee object
+			Offer offer = getOfferFromResultSet(rsOffer);
+
+			//Return employee object
+			return offer;
+		} catch (SQLException e) {
+			System.out.println("While searching for lastest offer inserted, an error occurred: " + e);
+			//Return exception
+			throw e;
+		}
+	}
 
 	//*************************************
 	//INSERT an offer
