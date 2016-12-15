@@ -51,6 +51,10 @@ public class NewBidderController {
 	// clear the fields
 	@FXML
 	private void clearInfo (ActionEvent actionEvent) throws ClassNotFoundException, SQLException {
+		clearFields();
+	}
+	
+	private void clearFields(){
 		nameText.setText("");
 		remarkText.setText("");
 	}

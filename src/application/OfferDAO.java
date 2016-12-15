@@ -94,14 +94,14 @@ public class OfferDAO {
 	//*************************************
 	//INSERT an offer
 	//*************************************
-	public static void insertOffer (String bidderID, String price, String deckID, String Date, String remark) throws SQLException, ClassNotFoundException {
+	public static void insertOffer (String bidderID, String price, String deckID, String date, String remark) throws SQLException, ClassNotFoundException {
 		//Declare a INSERT statement
 
 		String updateStmt =
 				"INSERT INTO Offer\n" +
 						"(BidderID, Price, DeckID, Date, Remark)\n" +
 						"VALUES\n" +
-						"('"+bidderID+"','"+price+"','"+deckID+"', '"+Date+"', '"+remark+"')";
+						"('"+bidderID+"','"+price+"','"+deckID+"', '"+date+"', '"+remark+"')";
 
 		//Execute INSERT operation
 		try {
