@@ -3,6 +3,7 @@ package ui;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import application.Bidder;
 import application.BidderDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class NewBidderController {
@@ -38,11 +40,20 @@ public class NewBidderController {
 	@FXML
 	private void addBidder (ActionEvent actionEvent) throws ClassNotFoundException, SQLException {
 		try {
-			BidderDAO.insertBidder(nameText.getText(),remarkText.getText());
-			messageLabel.setText("New bidder added!");
-			nameText.setText("");
-			remarkText.setText("");
+			Bidder bidder = BidderDAO.searchBidderName(nameText.getText());
+			if(bidder == null){
+				BidderDAO.insertBidder(nameText.getText(),remarkText.getText());
+				messageLabel.setTextFill(Color.web("#000000"));
+				messageLabel.setText("New bidder added!");
+				clearFields();
+			} else {
+				messageLabel.setTextFill(Color.web("#FF0000"));
+				messageLabel.setText("This bidder already existed!");
+				
+			}
+			
 		} catch (SQLException e) {
+			messageLabel.setTextFill(Color.web("#FF0000"));
 			messageLabel.setText("Problem occurred while inserting bidder " + e);
 			throw e;
 		}
@@ -53,7 +64,7 @@ public class NewBidderController {
 	private void clearInfo (ActionEvent actionEvent) throws ClassNotFoundException, SQLException {
 		clearFields();
 	}
-	
+
 	private void clearFields(){
 		nameText.setText("");
 		remarkText.setText("");
