@@ -8,17 +8,17 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.IndexController">
    <children>
-      <ComboBox layoutX="14.0" layoutY="43.0" prefWidth="150.0" promptText="Sort by" AnchorPane.rightAnchor="536.0" AnchorPane.topAnchor="20.0">
+      <ComboBox fx:id="sortBox" layoutX="14.0" layoutY="43.0" prefWidth="175.0" promptText="Sort by" AnchorPane.bottomAnchor="643.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="514.0" AnchorPane.topAnchor="20.0">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </ComboBox>
-      <TextField layoutX="197.0" layoutY="25.0" AnchorPane.topAnchor="25.0">
+      <TextField fx:id="searchField" layoutX="197.0" layoutY="25.0" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="25.0">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </TextField>
       <ScrollPane layoutX="-14.0" layoutY="64.0" prefHeight="636.0" prefWidth="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <Button layoutX="379.0" layoutY="25.0" mnemonicParsing="false" text="Search" AnchorPane.topAnchor="25.0" />
+      <Button fx:id="searchButton" layoutX="408.0" layoutY="25.0" mnemonicParsing="false" text="Search" AnchorPane.leftAnchor="408.0" AnchorPane.topAnchor="25.0" />
    </children>
 </AnchorPane>
