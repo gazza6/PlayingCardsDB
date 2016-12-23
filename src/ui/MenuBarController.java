@@ -18,12 +18,20 @@ public class MenuBarController {
 
 	@FXML // fx:id="addBidder"
 	private MenuItem addBidder; // Value injected by FXMLLoadera
+	
+	@FXML // fx:id="addBidder"
+	private MenuItem addDeck; // Value injected by FXMLLoadera
 
 	@FXML
 	void switchToIndex(ActionEvent event) throws IOException {
 
 		switchPane("Index.fxml");
 
+	}
+	
+	@FXML
+	void switchToAddDeck(ActionEvent event) throws IOException {
+		switchPane("NewDeck.fxml");
 	}
 
 	@FXML

@@ -41,7 +41,7 @@ public class DeckDAO {
 			deck.setId(rs.getInt("ID"));
 			deck.setName(rs.getString("Name"));
 			deck.setWinningOffer(rs.getInt("WinningOffer"));
-			deck.setCondition(rs.getInt("Condition"));
+			deck.setDeckCondition(rs.getInt("DeckCondition"));
 		}
 		return deck;
 	}
@@ -49,7 +49,7 @@ public class DeckDAO {
 	//*******************************
 	//SELECT Decks
 	//*******************************
-	public static ObservableList<Deck> searchEmployees () throws SQLException, ClassNotFoundException {
+	public static ObservableList<Deck> searchDecks() throws SQLException, ClassNotFoundException {
 		//Declare a SELECT statement
 		String selectStmt = "SELECT * FROM Deck";
 
@@ -80,7 +80,7 @@ public class DeckDAO {
 			deck.setId(rs.getInt("ID"));
 			deck.setName(rs.getString("Name"));
 			deck.setWinningOffer(rs.getInt("WinningOffer"));
-			deck.setCondition(rs.getInt("Condition"));
+			deck.setDeckCondition(rs.getInt("DeckCondition"));
 			//Add employee to the ObservableList
 			deckList.add(deck);
 		}
@@ -125,9 +125,9 @@ public class DeckDAO {
 
 		String updateStmt =
 				"INSERT INTO Deck\n" +
-						"(Name, condition, remark)\n" +
+						"(Name, DeckCondition, Remark)\n" +
 						"VALUES\n" +
-						"('"+name+"', '"+condition+"', '"+remark+")";
+						"('"+name+"', "+condition+", '"+remark+"')";
 
 		//Execute DELETE operation
 		try {
@@ -170,7 +170,7 @@ public class DeckDAO {
 				"BEGIN\n" +
 						"UPDATE Deck\n" +
 						"SET Name = '" + name + "', WinningOffer = '"+ winningOffer+ 
-						"', Condition = '"+ condition+ 
+						"', DeckCondition = '"+ condition+ 
 						"', Remark = '"+ remark+ "'\n" +
 						"    WHERE ID = " + id + ";\n" +
 						"   COMMIT;\n" +

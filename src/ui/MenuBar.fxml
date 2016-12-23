@@ -13,8 +13,7 @@
          </items></Menu>
       <Menu mnemonicParsing="false" text="Add">
          <items>
-            <MenuItem mnemonicParsing="false" text="New Deck" />
-            <MenuItem mnemonicParsing="false" text="New Offer" />
+            <MenuItem fx:id="addDeck" mnemonicParsing="false" onAction="#switchToAddDeck" text="New Deck" />
             <MenuItem fx:id="addBidder" mnemonicParsing="false" onAction="#switchToAddBidder" text="New Bidder" />
          </items>
       </Menu>

@@ -36,6 +36,9 @@ public class BidderDAO {
 		Bidder bidder = null;
 		if (rs.next()) {
 			bidder = new Bidder();
+			System.out.println(rs.getInt("ID"));
+			System.out.println(rs.getString("Name"));
+			System.out.println(rs.getString("Remark"));
 			bidder.setId(rs.getInt("ID"));
 			bidder.setName(rs.getString("Name"));
 			bidder.setRemark(rs.getString("Remark"));
@@ -45,7 +48,7 @@ public class BidderDAO {
 	
 	public static Bidder searchBidderName(String name) throws SQLException, ClassNotFoundException {
 		//Declare a SELECT statement
-		String selectStmt = "SELECT * FROM Bidder WHERE Name="+name;
+		String selectStmt = "SELECT * FROM Bidder WHERE Name='"+name+"'";
 
 		//Execute SELECT statement
 		try {
@@ -68,7 +71,7 @@ public class BidderDAO {
 	//*******************************
     //SELECT Bidders
     //*******************************
-    public static ObservableList<Bidder> searchEmployees () throws SQLException, ClassNotFoundException {
+    public static ObservableList<Bidder> searchBidders() throws SQLException, ClassNotFoundException {
         //Declare a SELECT statement
         String selectStmt = "SELECT * FROM Bidder";
 

@@ -3,6 +3,8 @@ package application;
 import java.sql.Date;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Bidder {
@@ -10,13 +12,19 @@ public class Bidder {
 	private IntegerProperty id;
 	private StringProperty name;
 	private StringProperty remark;
+	
+	public Bidder(){
+		this.id = new SimpleIntegerProperty();
+		this.name = new SimpleStringProperty();
+		this.remark = new SimpleStringProperty();
+	}
 
 	// id
 	public int getId() {
 		return id.get();
 	}
 	public void setId(int id) {
-		this.id.set(id);;
+		this.id.set(id);
 	}
 	public IntegerProperty idProperty(){
 		return id;

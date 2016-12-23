@@ -16,7 +16,7 @@ public class Deck {
 	private IntegerProperty id;
 	private StringProperty name;
 	private IntegerProperty winningOffer;
-	private IntegerProperty condition;
+	private IntegerProperty deckCondition;
 	private SimpleObjectProperty<Blob> image;
 	private StringProperty remark;
 
@@ -24,7 +24,7 @@ public class Deck {
 		this.id = new SimpleIntegerProperty();
 		this.name = new SimpleStringProperty();
 		this.winningOffer = new SimpleIntegerProperty();
-		this.condition = new SimpleIntegerProperty();
+		this.deckCondition = new SimpleIntegerProperty();
 		this.remark = new SimpleStringProperty();
 	}
 
@@ -62,14 +62,14 @@ public class Deck {
 	}
 
 	// condition
-	public int getCondition() {
-		return condition.get();
+	public int getDeckCondition() {
+		return deckCondition.get();
 	}
-	public void setCondition(int condition) {
-		this.condition.set(condition);
+	public void setDeckCondition(int deckCondition) {
+		this.deckCondition.set(deckCondition);
 	}
-	public IntegerProperty conditionProperty(){
-		return condition;
+	public IntegerProperty deckConditionProperty(){
+		return deckCondition;
 	}
 
 	// image
@@ -95,4 +95,11 @@ public class Deck {
 	public StringProperty remarkProperty(){
 		return remark;
 	}
+
+	@Override
+	public String toString() {
+		return name.get();
+	}
+	
+	
 }

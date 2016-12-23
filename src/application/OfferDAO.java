@@ -122,7 +122,7 @@ public class OfferDAO {
 				"INSERT INTO Offer\n" +
 						"(BidderID, Price, DeckID, Date, Remark)\n" +
 						"VALUES\n" +
-						"('"+bidderID+"','"+price+"','"+deckID+"', '"+date+"', '"+remark+"')";
+						"("+bidderID+","+price+","+deckID+", '"+date+"', '"+remark+"')";
 
 		//Execute INSERT operation
 		try {
