@@ -132,8 +132,5 @@ public class NewDeckController implements Initializable {
 		}
 	}
 
-	private void getAllDecks (ActionEvent actionEvent) throws ClassNotFoundException, SQLException {
-		ObservableList<Deck> decks = DeckDAO.searchDecks();
-	}
 
 }

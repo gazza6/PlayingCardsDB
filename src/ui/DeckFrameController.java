@@ -1,22 +1,33 @@
 package ui;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
+import application.Deck;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class DeckFrameController implements Initializable{
 	
 	Stage prevStage;
+	
+	@FXML
+	private AnchorPane pane  = new AnchorPane();
 
 	@FXML
-	private Label deckNameLabel;
+	private Label deckNameLabel = new Label();
 	
 	@FXML
 	private Label priceLabel;
@@ -45,13 +56,24 @@ public class DeckFrameController implements Initializable{
 	@FXML
 	private ImageView imageView;
 
+	public void setPrevStage(Stage stage) {
+		this.prevStage = stage;
+	}
+	
+	 public void setValues(ResultSet rs){
+		//deckNameLabel.setText(name);
+//		 deckNameLabel.setText(deck.getName());
+//		 priceLabel.setText(value);
+//		 bidderNamerLabel.setText(value);
+//		 conditionLabel.setText(value);
+//		 dateLabel.setText(value);
+//		 remarkArea.setText(value);
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	public void setPrevStage(Stage stage) {
-		this.prevStage = stage;
-	}
+
 }
