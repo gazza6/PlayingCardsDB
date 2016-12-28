@@ -1,6 +1,7 @@
 package ui;
 
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
 import application.Deck;
@@ -54,15 +55,15 @@ public class IndexController implements Initializable {
 		scroller.setFitToWidth(true);
 
 		try {
-			ObservableList<Deck> decks = DeckDAO.searchDecks();
+			ResultSet decks = DeckDAO.deckDetail();
 
-			for(Deck d : decks){
+			while(decks.next()){
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("DeckFrame.fxml"));
 		        AnchorPane flowPane = loader.load();
 		        // Get the Controller from the FXMLLoader
 		        DeckFrameController controller = loader.getController();
 		        // Set data in the controller
-//		        controller.setValues(d.getName());
+		        controller.setValues(decks);
 		        deckBox.getChildren().add(flowPane);
 			}
 
