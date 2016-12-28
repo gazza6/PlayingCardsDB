@@ -33,7 +33,7 @@ public class Start extends Application {
 		URL menuBarUrl = getClass().getResource("MenuBar.fxml");
 		MenuBar bar = FXMLLoader.load( menuBarUrl );
 
-		URL indexUrl = getClass().getResource("Index.fxml");
+		URL indexUrl = getClass().getResource("ScrollPane.fxml");
 		AnchorPane indexPage = FXMLLoader.load( indexUrl );
 
 		// constructing our scene using the static root

@@ -67,7 +67,7 @@ public class DeckFrameController implements Initializable{
 		priceLabel.setText(rs.getString("Price"));
 		bidderNamerLabel.setText(rs.getString("BidderName"));
 		conditionLabel.setText(rs.getString("DeckCondition"));
-		dateLabel.setText(rs.getString("Date"));
+		dateLabel.setText(rs.getDate("Date").toString());
 		remarkArea.setText(rs.getString("Remark"));
 	}
 

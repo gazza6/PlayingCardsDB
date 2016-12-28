@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import application.Bidder;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -36,9 +37,10 @@ public class BidderFrameController implements Initializable{
 		this.prevStage = stage;
 	}
 
-	public void setValues(ResultSet rs) throws SQLException{
-		bidderNameLabel.setText(rs.getString("Name"));
-		remarkArea.setText(rs.getString("Remark"));
+	public void setValues(Bidder bidder) throws SQLException{
+		System.out.println("In the bidder class");
+		bidderNameLabel.setText(bidder.getName());
+		remarkArea.setText(bidder.getRemark());
 	}
 
 	@Override
