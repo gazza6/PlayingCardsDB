@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -19,7 +20,10 @@
       <TextArea fx:id="remarkArea" layoutX="522.0" layoutY="77.0" prefHeight="100.0" prefWidth="150.0" AnchorPane.leftAnchor="400.0" />
       <Button fx:id="fullBidderButton" layoutX="584.0" layoutY="83.0" mnemonicParsing="false" text="Full bidders" />
       <Button fx:id="viewAllButton" layoutX="583.0" layoutY="136.0" mnemonicParsing="false" text="View all" />
-      <Label fx:id="deckNameLabel" layoutX="355.0" layoutY="20.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="20.0" />
+      <Label fx:id="deckNameLabel" layoutX="355.0" layoutY="20.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
       <Label fx:id="priceLabel" layoutX="355.0" layoutY="54.0" AnchorPane.leftAnchor="300.0" />
       <Label fx:id="bidderNamerLabel" layoutX="355.0" layoutY="88.0" AnchorPane.leftAnchor="300.0" />
       <Label fx:id="conditionLabel" layoutX="355.0" layoutY="127.0" AnchorPane.leftAnchor="300.0" />

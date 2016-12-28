@@ -50,44 +50,33 @@ public class IndexController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		sortBox.getItems().setAll("Oldest first", "Newest first", "A > Z", "Z < A");
+		// sort by date, by name
+		sortBox.getItems().setAll("Oldest first", "Newest first", "A > Z", "Z > A");
 		sortBox.getSelectionModel().selectFirst();
 		scroller.setFitToWidth(true);
 
 		try {
 			ResultSet decks = DeckDAO.deckDetail();
+			int i = 0;
 
 			while(decks.next()){
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("DeckFrame.fxml"));
-		        AnchorPane flowPane = loader.load();
-		        // Get the Controller from the FXMLLoader
-		        DeckFrameController controller = loader.getController();
-		        // Set data in the controller
-		        controller.setValues(decks);
-		        deckBox.getChildren().add(flowPane);
+				AnchorPane flowPane = loader.load();
+				if(i % 2 == 0){
+					flowPane.setStyle("-fx-background-color: #D7DBDD");
+				}
+				// Get the Controller from the FXMLLoader
+				DeckFrameController controller = loader.getController();
+				// Set data in the controller
+				controller.setValues(decks);
+				deckBox.getChildren().add(flowPane);
+				i++;
 			}
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-
-//		addButton.setOnAction(new EventHandler<ActionEvent>() {
-//
-//			@Override
-//			public void handle(ActionEvent e) {
-//				URL menuBarUrl = getClass().getResource("DeckFrame.fxml");
-//				AnchorPane pane;
-//				try {
-//					pane = FXMLLoader.load( menuBarUrl );
-//					deckBox.getChildren().add(pane);
-//				} catch (IOException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-//
-//			}
-//		});
 	}
 
 }
