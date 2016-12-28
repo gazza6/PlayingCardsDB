@@ -36,7 +36,6 @@ public class ScrollPaneController implements Initializable{
 			int i = 0;
 
 			for(Bidder b : bidders){
-				System.out.println("Bidder: " + b.getName());
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("BidderFrame.fxml"));
 				AnchorPane flowPane = loader.load();
 				if(i % 2 == 0){

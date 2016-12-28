@@ -16,7 +16,7 @@ import application.DeckDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Connect {
+public class PlayAround {
 	public static void main (String[] args) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");  

@@ -44,7 +44,7 @@ public class MenuBarController {
 	
 	@FXML
 	void switchToViewBidder(ActionEvent event) throws IOException {
-		switchPane("ScollPane.fxml");
+		switchPane("ScrollPane.fxml");
 	}
 	
 	private void switchPane(String url) throws IOException{
