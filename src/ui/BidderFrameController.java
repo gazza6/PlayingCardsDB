@@ -61,8 +61,14 @@ public class BidderFrameController implements Initializable{
 	}
 	
 	@FXML
-	public void bidderDetail() throws SQLException{
-		
+	public void bidderOffers() throws SQLException, IOException{
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("BidderIndex.fxml"));
+		AnchorPane flowPane = loader.load();
+		BidderIndexController controller = loader.getController();
+		// Set data in the controller
+		controller.bidderAllOffers(this.bidder);
+		BorderPane border = Start.getRoot();
+		border.setCenter(flowPane);
 	}
 
 	@Override

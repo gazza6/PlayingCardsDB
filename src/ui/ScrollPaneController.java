@@ -1,7 +1,9 @@
 package ui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import application.Bidder;
@@ -28,9 +30,8 @@ public class ScrollPaneController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		scroller.setFitToWidth(true);
 		
+		scroller.setFitToWidth(true);
 		try {
 			ObservableList<Bidder> bidders = BidderDAO.searchBidders();
 			int i = 0;
@@ -53,6 +54,7 @@ public class ScrollPaneController implements Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+		
 	}
 
 }

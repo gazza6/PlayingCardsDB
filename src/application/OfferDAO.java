@@ -52,7 +52,7 @@ public class OfferDAO {
 	//*******************************
 	//SELECT Decks
 	//*******************************
-	public static ObservableList<Offer> searchEmployees () throws SQLException, ClassNotFoundException {
+	public static ObservableList<Offer> searchOffers () throws SQLException, ClassNotFoundException {
 		//Declare a SELECT statement
 		String selectStmt = "SELECT * FROM Offer";
 

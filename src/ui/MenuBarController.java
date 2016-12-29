@@ -2,6 +2,7 @@ package ui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,9 +28,7 @@ public class MenuBarController {
 
 	@FXML
 	void switchToIndex(ActionEvent event) throws IOException {
-
 		switchPane("Index.fxml");
-
 	}
 	
 	@FXML
@@ -43,7 +42,8 @@ public class MenuBarController {
 	}
 	
 	@FXML
-	void switchToViewBidder(ActionEvent event) throws IOException {
+	void switchToViewBidder(ActionEvent event) throws IOException, SQLException {
+		//switchPane("ScrollPane.fxml");
 		switchPane("ScrollPane.fxml");
 	}
 	

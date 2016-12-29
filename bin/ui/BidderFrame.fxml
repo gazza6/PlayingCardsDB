@@ -23,7 +23,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="detailButton" layoutX="616.0" layoutY="69.0" mnemonicParsing="false" onAction="#bidderDetail" text="Detail" />
+      <Button fx:id="detailButton" layoutX="616.0" layoutY="69.0" mnemonicParsing="false" onAction="#bidderOffers" text="Offers" />
       <Button fx:id="editButton" layoutX="622.0" layoutY="20.0" mnemonicParsing="false" onAction="#editBidder" text="Edit" />
       <TextArea fx:id="remarkArea" layoutX="342.0" layoutY="39.0" prefHeight="50.0" prefWidth="200.0" />
    </children>
