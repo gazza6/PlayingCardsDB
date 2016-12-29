@@ -62,7 +62,6 @@ public class DeckFrameController implements Initializable{
 	}
 
 	public void setValues(ResultSet rs) throws SQLException{
-		//deckNameLabel.setText(name);
 		deckNameLabel.setText(rs.getString("Name"));
 		priceLabel.setText(rs.getString("Price"));
 		bidderNamerLabel.setText(rs.getString("BidderName"));

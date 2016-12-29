@@ -61,7 +61,7 @@ public class BidderFrameController implements Initializable{
 	}
 	
 	@FXML
-	public void bidderOffers() throws SQLException, IOException{
+	public void bidderOffers() throws SQLException, IOException, ClassNotFoundException{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("BidderIndex.fxml"));
 		AnchorPane flowPane = loader.load();
 		BidderIndexController controller = loader.getController();
