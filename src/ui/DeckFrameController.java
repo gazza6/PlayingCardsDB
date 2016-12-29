@@ -1,6 +1,7 @@
 package ui;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -67,13 +69,18 @@ public class DeckFrameController implements Initializable{
 		bidderNamerLabel.setText(rs.getString("BidderName"));
 		conditionLabel.setText(rs.getString("DeckCondition"));
 		dateLabel.setText(rs.getDate("Date").toString());
+		InputStream imgStream = rs.getBinaryStream("Image"); 
+		if(imgStream != null){
+			Image image = new Image(imgStream);
+			imageView.setImage(image);
+		}
 		remarkArea.setText(rs.getString("Remark"));
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -1,5 +1,6 @@
 package application;
 
+import java.io.FileInputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -117,7 +118,7 @@ public class DeckDAO {
 
 	public static ResultSet deckDetail() throws SQLException, ClassNotFoundException {
 		String selectStmt =
-				"SELECT d.Name, d.DeckCondition, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date FROM Deck d LEFT JOIN Offer o on d.ID = o.DeckID left join Bidder b on o.BidderID = b.ID";
+				"SELECT d.Name, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date FROM Deck d LEFT JOIN Offer o on d.ID = o.DeckID left join Bidder b on o.BidderID = b.ID";
 
 		//Execute SELECT statement
 		try {
@@ -134,7 +135,7 @@ public class DeckDAO {
 		//*************************************
 		//INSERT a deck with no winning bid
 		//*************************************
-		public static void insertDeck (String name, String condition, String remark) throws SQLException, ClassNotFoundException {
+		public static void insertDeck (String name, String condition, FileInputStream fin, String remark) throws SQLException, ClassNotFoundException {
 			//Declare a INSERT statement
 
 			// To do 
@@ -143,7 +144,7 @@ public class DeckDAO {
 					"INSERT INTO Deck\n" +
 							"(Name, DeckCondition, Remark)\n" +
 							"VALUES\n" +
-							"('"+name+"', "+condition+", '"+remark+"')";
+							"('"+name+"', "+condition+","+fin+", '"+remark+"')";
 
 			//Execute DELETE operation
 			try {

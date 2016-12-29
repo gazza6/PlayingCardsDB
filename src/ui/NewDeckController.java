@@ -1,8 +1,15 @@
 package ui;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import javax.imageio.ImageIO;
 
 import application.Bidder;
 import application.BidderDAO;
@@ -24,7 +31,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class NewDeckController implements Initializable {
@@ -53,6 +62,11 @@ public class NewDeckController implements Initializable {
 	private Button addButton;
 	@FXML
 	private Button clearButton;
+	@FXML
+	private Button photoButton;
+	
+	final FileChooser fileChooser = new FileChooser();
+	private FileInputStream photoStream;
 
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -63,12 +77,12 @@ public class NewDeckController implements Initializable {
 			for(Deck d : decks){
 				deckCombo.getItems().add(d.getName());
 			}
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-		
+
 		deckCombo.valueProperty().addListener(new ChangeListener<String>() {
 			@Override public void changed(ObservableValue ov, String name, String deckName) {
 				deckText.setText(deckName);
@@ -99,7 +113,7 @@ public class NewDeckController implements Initializable {
 	private void addDeck (ActionEvent actionEvent) throws ClassNotFoundException, SQLException {
 		try {
 
-			DeckDAO.insertDeck(deckText.getText(), conditionCombo.getSelectionModel().getSelectedItem().toString(), remarkText.getText());
+			DeckDAO.insertDeck(deckText.getText(), conditionCombo.getSelectionModel().getSelectedItem().toString(), photoStream, remarkText.getText());
 
 			// search bidder name if do not exist, then create a new one
 
@@ -132,5 +146,13 @@ public class NewDeckController implements Initializable {
 		}
 	}
 
+	@FXML
+	private void addPhoto (ActionEvent actionEvent) throws ClassNotFoundException, SQLException, FileNotFoundException {
+		File file = fileChooser.showOpenDialog(prevStage);
+		System.out.println(file.toURI().toString());
+		Image image = new Image(file.toURI().toString());
+		imageView.setImage(image);
+		this.photoStream = new FileInputStream ( file );
+	}
 
 }
