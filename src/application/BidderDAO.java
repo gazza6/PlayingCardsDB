@@ -135,15 +135,12 @@ public class BidderDAO {
   //*************************************
     //UPDATE a bidder 
     //*************************************
-    public static void updateBidder (String id, String name, String remark) throws SQLException, ClassNotFoundException {
+    public static void updateBidder (int id, String name, String remark) throws SQLException, ClassNotFoundException {
         //Declare a UPDATE statement
         String updateStmt =
-                "BEGIN\n" +
                         "   UPDATE Bidder\n" +
-                        "      SET Name = '" + name + "',' Remark = " + remark + "'\n" +
-                        "    WHERE ID = " + id + ";\n" +
-                        "   COMMIT;\n" +
-                        "END;";
+                        "      SET Name = '" + name + "', Remark = '" + remark + "'\n" +
+                        "    WHERE ID = " + id;
  
         //Execute UPDATE operation
         try {
