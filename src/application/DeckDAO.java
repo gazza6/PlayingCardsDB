@@ -116,9 +116,19 @@ public class DeckDAO {
 		}
 	}
 
-	public static ResultSet deckDetail() throws SQLException, ClassNotFoundException {
-		String selectStmt =
-				"SELECT d.Name, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date FROM Deck d LEFT JOIN Offer o on d.ID = o.DeckID left join Bidder b on o.BidderID = b.ID";
+	public static ResultSet deckDetail(String order) throws SQLException, ClassNotFoundException {
+		String originalStmt =
+				"SELECT d.Name, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date FROM Deck d LEFT JOIN Offer o on d.ID = o.DeckID left join Bidder b on o.BidderID = b.ID ";
+		String selectStmt = null;
+		
+		switch(order){
+		case "Earliest added": selectStmt = originalStmt; break;
+		case "Latest added": selectStmt = originalStmt + "ORDER BY d.ID DESC"; break;
+		case "Oldest first": selectStmt = originalStmt + "ORDER BY o.Date ASC"; break;
+		case "Newest first": selectStmt = originalStmt + "ORDER BY o.Date DESC"; break;
+		case "A > Z": selectStmt = originalStmt + "ORDER BY d.Name ASC"; break;
+		case "Z > A": selectStmt = originalStmt + "ORDER BY d.Name DESC"; break;
+		}
 
 		//Execute SELECT statement
 		try {

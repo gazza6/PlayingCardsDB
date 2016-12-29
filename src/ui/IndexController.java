@@ -1,15 +1,20 @@
 package ui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import application.Deck;
 import application.DeckDAO;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -50,33 +55,63 @@ public class IndexController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// sort by date, by name
-		sortBox.getItems().setAll("Oldest first", "Newest first", "A > Z", "Z > A");
+		// sort by id, date, by name
+		sortBox.getItems().setAll("Latest added", "Earliest added", "Oldest first", "Newest first", "A > Z", "Z > A");
 		sortBox.getSelectionModel().selectFirst();
+		
+		ResultSet decks = null;
 		scroller.setFitToWidth(true);
-
 		try {
-			ResultSet decks = DeckDAO.deckDetail();
-			int i = 0;
-
-			while(decks.next()){
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("DeckFrame.fxml"));
-				AnchorPane flowPane = loader.load();
-				if(i % 2 == 0){
-					flowPane.setStyle("-fx-background-color: #D7DBDD");
-				}
-				// Get the Controller from the FXMLLoader
-				DeckFrameController controller = loader.getController();
-				// Set data in the controller
-				controller.setValues(decks);
-				deckBox.getChildren().add(flowPane);
-				i++;
-			}
-
-		} catch (Exception e) {
+			fillDecks(sortBox.getSelectionModel().getSelectedItem().toString());
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		 sortBox.valueProperty().addListener(new ChangeListener<String>() {
+		        @Override public void changed(ObservableValue ov, String t, String t1) {
+		        	try {
+						fillDecks(t1);
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+		        }    
+		    });
+		
+	}
+	
+	private void fillDecks(String order) throws SQLException, IOException, ClassNotFoundException{
+		deckBox.getChildren().clear();
+		ResultSet decks = DeckDAO.deckDetail(order);
+		int i = 0;
+
+		while(decks.next()){
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("DeckFrame.fxml"));
+			AnchorPane flowPane = loader.load();
+			if(i % 2 == 0){
+				flowPane.setStyle("-fx-background-color: #D7DBDD");
+			}
+			// Get the Controller from the FXMLLoader
+			DeckFrameController controller = loader.getController();
+			// Set data in the controller
+			controller.setValues(decks);
+			deckBox.getChildren().add(flowPane);
+			i++;
+		}
 	}
 
 }
