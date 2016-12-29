@@ -93,7 +93,7 @@ public class OfferDAO {
 	
 	public static ResultSet allOfferForBidder(Bidder bidder) throws SQLException, ClassNotFoundException {
 		String selectStmt =
-				"SELECT d.Name, d.DeckCondition, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date FROM Deck d LEFT JOIN Offer o on d.ID = o.DeckID left join Bidder b on o.BidderID = b.ID WHERE o.BidderID = "+bidder.getId();
+				"SELECT d.Name, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date FROM Deck d LEFT JOIN Offer o on d.ID = o.DeckID left join Bidder b on o.BidderID = b.ID WHERE o.BidderID = "+bidder.getId();
 
 		//Execute SELECT statement
 		try {

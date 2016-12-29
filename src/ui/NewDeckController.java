@@ -6,7 +6,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
@@ -67,6 +71,7 @@ public class NewDeckController implements Initializable {
 	
 	final FileChooser fileChooser = new FileChooser();
 	private FileInputStream photoStream;
+	private File file;
 
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -106,6 +111,9 @@ public class NewDeckController implements Initializable {
 		priceText.setText("");
 		bidderText.setText("");
 		remarkText.setText("");
+		file = null;
+		photoStream = null;
+		imageView.setImage(null);
 	}
 
 	//add a new deck
@@ -113,8 +121,35 @@ public class NewDeckController implements Initializable {
 	private void addDeck (ActionEvent actionEvent) throws ClassNotFoundException, SQLException {
 		try {
 
+			if(photoStream == null){
 			DeckDAO.insertDeck(deckText.getText(), conditionCombo.getSelectionModel().getSelectedItem().toString(), photoStream, remarkText.getText());
+			} else {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection conn=DriverManager.getConnection(  
+							"jdbc:mysql://localhost:3306/Cards","root","root");  
+					System.out.println("connected");
+					Statement stmt = conn.createStatement();
+					String updateStmt =
+							"INSERT INTO Deck\n" +
+									"(Name, DeckCondition, Image, Remark)\n" +
+									"VALUES\n" +
+									"(?, ?, ?, ?)";
+					PreparedStatement ps = conn.prepareStatement(updateStmt);
+					ps.setString(1, deckText.getText());
+					ps.setInt(2, Integer.parseInt(conditionCombo.getSelectionModel().getSelectedItem().toString()));
+					ps.setBinaryStream(3, photoStream, (int) file.length());
+					ps.setString(4, remarkText.getText());
+					ps.executeUpdate();
+					System.out.println("Added");
 
+					conn.close();
+				} catch (Exception e) {
+					System.err.println("Got an exception! ");
+
+					e.printStackTrace();
+				}
+			}
 			// search bidder name if do not exist, then create a new one
 
 			Bidder bidder = BidderDAO.searchBidderName(bidderText.getText());
@@ -153,6 +188,7 @@ public class NewDeckController implements Initializable {
 		Image image = new Image(file.toURI().toString());
 		imageView.setImage(image);
 		this.photoStream = new FileInputStream ( file );
+		this.file = file;
 	}
 
 }
