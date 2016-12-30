@@ -48,19 +48,25 @@ public class DeckFrameController implements Initializable{
 	private TextArea remarkArea;
 
 	@FXML
-	private Button detailButton;
+	private Button editButton;
+	
+	@FXML
+	private Button historyButton;
 
 	@FXML
 	private Button viewAllButton;
 
 	@FXML
 	private ImageView imageView;
+	
+	private ResultSet rs;
 
 	public void setPrevStage(Stage stage) {
 		this.prevStage = stage;
 	}
 
 	public void setValues(ResultSet rs) throws SQLException{
+		this.rs = rs;
 		deckNameLabel.setText(rs.getString("Name"));
 		priceLabel.setText(rs.getString("Price"));
 		bidderNamerLabel.setText(rs.getString("BidderName"));
@@ -72,6 +78,25 @@ public class DeckFrameController implements Initializable{
 			imageView.setImage(image);
 		}
 		remarkArea.setText(rs.getString("Remark"));
+	}
+	
+	@FXML
+	public void viewHistory() {
+		
+	}
+	
+	@FXML
+	public void editDeck() throws IOException {
+		int i = 0;
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("EditDeck.fxml"));
+		AnchorPane flowPane = loader.load();
+		if(i % 2 == 0){
+			flowPane.setStyle("-fx-background-color: #D7DBDD");
+		}
+		// Get the Controller from the FXMLLoader
+		EditDeckController controller = loader.getController();
+		// Set data in the controller
+		controller.setValues(this.rs);
 	}
 
 	@Override

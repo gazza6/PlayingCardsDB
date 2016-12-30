@@ -50,8 +50,8 @@
          </font>
       </Label>
       <TextField fx:id="bidderText" layoutX="75.0" layoutY="447.0" AnchorPane.leftAnchor="75.0" />
-      <Button fx:id="editButton" layoutX="516.0" layoutY="609.0" mnemonicParsing="false" onAction="#editDeck" prefHeight="40.0" prefWidth="80.0" text="Edit" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="150.0" />
-      <Button fx:id="cancelButton" layoutX="151.0" layoutY="609.0" mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="80.0" text="Cancel" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="150.0" />
+      <Button fx:id="editButton" layoutX="525.0" layoutY="610.0" mnemonicParsing="false" onAction="#editDeck" prefHeight="40.0" prefWidth="80.0" text="Edit" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="95.0" />
+      <Button fx:id="cancelButton" layoutX="82.0" layoutY="610.0" mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="80.0" text="Cancel" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="82.0" />
       <Label layoutX="425.0" layoutY="88.0" text="Image">
          <font>
             <Font size="17.0" />
@@ -61,5 +61,10 @@
       <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="425.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
       <ComboBox fx:id="conditionCombo" layoutX="75.0" layoutY="268.0" prefWidth="150.0" />
       <Button fx:id="photoButton" layoutX="426.0" layoutY="293.0" mnemonicParsing="false" onAction="#addPhoto" text="Choose photo" />
+      <Button fx:id="addBidsButton" layoutX="291.0" layoutY="617.0" mnemonicParsing="false" onAction="#addBids" text="Add bids">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

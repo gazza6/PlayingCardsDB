@@ -3,6 +3,7 @@ package ui;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
@@ -46,6 +47,8 @@ public class EditDeckController {
 	private Button cancelButton;
 	@FXML
 	private Button photoButton;
+	@FXML
+	private Button addBidsButton;
 	
 	final FileChooser fileChooser = new FileChooser();
 	private FileInputStream photoStream;
@@ -54,6 +57,14 @@ public class EditDeckController {
 	public void setPrevStage(Stage stage) {
 		this.prevStage = stage;
 
+	}
+	
+	public void setValues(ResultSet rs){
+		
+	}
+	
+public void addBids(){
+		
 	}
 	
 	@FXML
