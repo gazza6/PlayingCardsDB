@@ -7,12 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import application.Deck;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -20,7 +20,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class DeckFrameController implements Initializable{
 
@@ -67,6 +69,7 @@ public class DeckFrameController implements Initializable{
 
 	public void setValues(ResultSet rs) throws SQLException{
 		this.rs = rs;
+ 
 		deckNameLabel.setText(rs.getString("Name"));
 		priceLabel.setText(rs.getString("Price"));
 		bidderNamerLabel.setText(rs.getString("BidderName"));
@@ -81,8 +84,16 @@ public class DeckFrameController implements Initializable{
 	}
 	
 	@FXML
-	public void viewHistory() {
-		
+	public void viewHistory() throws IOException, SQLException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BidHistory.fxml"));
+		AnchorPane flowPane = fxmlLoader.load();
+        BidHistoryController controller = fxmlLoader.getController();
+        controller.setValue();
+        
+        Stage stage = new Stage();
+        stage.setTitle("Bid history");
+        stage.setScene(new Scene(flowPane));  
+        stage.show();
 	}
 	
 	@FXML
