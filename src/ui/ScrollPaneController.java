@@ -32,6 +32,10 @@ public class ScrollPaneController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		scroller.setFitToWidth(true);
+		
+	}
+	
+	public void setBidderValue(){
 		try {
 			ObservableList<Bidder> bidders = BidderDAO.searchBidders();
 			int i = 0;
@@ -54,7 +58,6 @@ public class ScrollPaneController implements Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-		
 	}
 
 }

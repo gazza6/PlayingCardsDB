@@ -43,8 +43,13 @@ public class MenuBarController {
 	
 	@FXML
 	void switchToViewBidder(ActionEvent event) throws IOException, SQLException {
-		//switchPane("ScrollPane.fxml");
-		switchPane("ScrollPane.fxml");
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("ScrollPane.fxml"));
+		AnchorPane pane = loader.load();
+		ScrollPaneController controller = loader.getController();
+		// Set data in the controller
+		controller.setBidderValue();
+		BorderPane border = Start.getRoot();
+		border.setCenter(pane);
 	}
 	
 	private void switchPane(String url) throws IOException{
