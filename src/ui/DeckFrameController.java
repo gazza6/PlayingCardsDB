@@ -48,10 +48,7 @@ public class DeckFrameController implements Initializable{
 	private TextArea remarkArea;
 
 	@FXML
-	private Button editButton;
-
-	@FXML
-	private Button fullBidderButton;
+	private Button detailButton;
 
 	@FXML
 	private Button viewAllButton;

@@ -33,7 +33,7 @@ public class Deck {
 		return id.get();
 	}
 	public void setId(int id) {
-		this.id.set(id);;
+		this.id.set(id);
 	}
 	public IntegerProperty idProperty(){
 		return id;
@@ -44,7 +44,7 @@ public class Deck {
 		return name.get();
 	}
 	public void setName(String name) {
-		this.name.set(name);;
+		this.name.set(name);
 	}
 	public StringProperty nameProperty(){
 		return name;
@@ -55,7 +55,7 @@ public class Deck {
 		return winningOffer.get();
 	}
 	public void setWinningOffer(int winningOffer) {
-		this.winningOffer.set(winningOffer);;
+		this.winningOffer.set(winningOffer);
 	}
 	public IntegerProperty winningOfferProperty(){
 		return winningOffer;

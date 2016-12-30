@@ -136,6 +136,24 @@ public class DeckDAO {
 			ResultSet rsDeck = DBUtil.dbExecuteQuery(selectStmt);
 			return rsDeck;
 		} catch (SQLException e) {
+			System.out.println("While sorting all decks infomation, an error occurred: " + e);
+			//Return exception
+			throw e;
+		}
+	}
+	
+	public static ResultSet search(String searchWord) throws SQLException, ClassNotFoundException {
+		String originalStmt =
+				"SELECT d.Name, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date FROM Deck d LEFT JOIN Offer o on d.ID = o.DeckID left join Bidder b on o.BidderID = b.ID "
+				+"WHERE(d.Name LIKE '%"+searchWord+"%' OR b.Name LIKE '%"+searchWord+"%')";
+		
+
+		//Execute SELECT statement
+		try {
+			//Get ResultSet from dbExecuteQuery method
+			ResultSet rsDeck = DBUtil.dbExecuteQuery(originalStmt);
+			return rsDeck;
+		} catch (SQLException e) {
 			System.out.println("While searching for all decks infomation, an error occurred: " + e);
 			//Return exception
 			throw e;
