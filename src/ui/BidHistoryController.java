@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import application.Bidder;
 import application.DeckFull;
 import application.OfferDAO;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,7 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class BidHistoryController{
+public class BidHistoryController implements Initializable{
 
 	Stage prevStage;
 
@@ -34,14 +35,15 @@ public class BidHistoryController{
 	private VBox offerVBox = new VBox();
 
 	public void setValue(DeckFull df) throws ClassNotFoundException, SQLException, IOException{
+		//this.df = df;
 		nameLabel.setText(df.getName());
 		InputStream imgStream = df.getImage(); 
 		if(imgStream != null){
-			Image image = new Image(imgStream);
+			Image image = new Image("file:/Users/shenghaolu/Downloads/browngn.JPG");
 			imageView.setImage(image);
 		}
 		int i = 0;
-		
+
 		ResultSet rs = OfferDAO.allOfferForDeck(df);
 
 		while(rs.next()){
@@ -57,6 +59,12 @@ public class BidHistoryController{
 			offerVBox.getChildren().add(flowPane);
 			i++;
 		}
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+		
 	}
 
 }

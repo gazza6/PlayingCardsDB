@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -58,6 +59,8 @@ public class EditDeckController implements Initializable{
 	private Button photoButton;
 	@FXML
 	private Button addBidsButton;
+	
+	private DeckFull df;
 
 	final FileChooser fileChooser = new FileChooser();
 	private FileInputStream photoStream;
@@ -69,6 +72,7 @@ public class EditDeckController implements Initializable{
 	}
 
 	public void setValues(DeckFull df){
+		this.df = df;
 		deckText.setText(df.getName());
 		priceText.setText(String.valueOf(df.getPrice()));
 		bidderText.setText(df.getBidderName());
@@ -82,8 +86,16 @@ public class EditDeckController implements Initializable{
 		conditionCombo.getSelectionModel().select(5-df.getDeckCondition());
 	}
 
-	public void addBids(){
-
+	public void addBids() throws IOException{
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewOffer.fxml"));
+		AnchorPane flowPane = fxmlLoader.load();
+		NewOfferController controller = fxmlLoader.getController();
+		controller.setValue(df.getId());
+		
+		Stage stage = new Stage();
+		stage.setTitle("New bid offer");
+		stage.setScene(new Scene(flowPane));  
+		stage.show();
 	}
 	
 	@FXML

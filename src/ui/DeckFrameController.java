@@ -25,7 +25,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class DeckFrameController implements Initializable{
+public class DeckFrameController {
 
 	Stage prevStage;
 
@@ -85,8 +85,8 @@ public class DeckFrameController implements Initializable{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BidHistory.fxml"));
 		AnchorPane flowPane = fxmlLoader.load();
 		BidHistoryController controller = fxmlLoader.getController();
-		System.out.println("deckName test: "+deckFull.getName());
 		controller.setValue(deckFull);
+		
 		Stage stage = new Stage();
 		stage.setTitle("Bid history");
 		stage.setScene(new Scene(flowPane));  
@@ -103,12 +103,6 @@ public class DeckFrameController implements Initializable{
 		controller.setValues(deckFull);
 		BorderPane border = Start.getRoot();
 		border.setCenter(flowPane);
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

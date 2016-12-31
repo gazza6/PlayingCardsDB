@@ -60,7 +60,6 @@ public class IndexController implements Initializable {
 		sortBox.getItems().setAll("Latest added", "Earliest added", "Oldest first", "Newest first", "A > Z", "Z > A");
 		sortBox.getSelectionModel().selectFirst();
 		
-		ResultSet decks = null;
 		scroller.setFitToWidth(true);
 		try {
 			fillDecks(sortBox.getSelectionModel().getSelectedItem().toString());
