@@ -6,26 +6,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="300.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NewOfferController">
+<AnchorPane prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NewOfferController">
    <children>
-      <Label layoutX="92.0" layoutY="29.0" text="Name" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="30.0">
+      <Label layoutX="100.0" layoutY="55.0" text="Name" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="96.0" layoutY="87.0" text="Price" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="90.0">
+      <Label layoutX="103.0" layoutY="127.0" text="Price" AnchorPane.leftAnchor="103.0" AnchorPane.topAnchor="127.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="92.0" layoutY="162.0" text="Date" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="150.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="bidderText" layoutX="250.0" layoutY="28.0" AnchorPane.leftAnchor="250.0" />
-      <TextField fx:id="priceText" layoutX="250.0" layoutY="88.0" AnchorPane.leftAnchor="250.0" />
-      <Button fx:id="addButton" layoutX="503.0" layoutY="231.0" mnemonicParsing="false" onAction="#addOffer" text="Add">
+      <TextField fx:id="bidderText" layoutX="250.0" layoutY="53.0" AnchorPane.leftAnchor="250.0" />
+      <TextField fx:id="priceText" layoutX="250.0" layoutY="125.0" AnchorPane.leftAnchor="250.0" />
+      <Button fx:id="addButton" layoutX="358.0" layoutY="231.0" mnemonicParsing="false" onAction="#addOffer" text="Add">
          <font>
             <Font size="18.0" />
          </font>
@@ -35,6 +30,5 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <DatePicker fx:id="datePicker" layoutX="253.0" layoutY="148.0" AnchorPane.leftAnchor="250.0" />
    </children>
 </AnchorPane>

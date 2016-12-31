@@ -4,11 +4,11 @@ import java.sql.SQLException;
 
 import application.Bidder;
 import application.BidderDAO;
+import application.DeckFull;
 import application.OfferDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -19,16 +19,14 @@ public class NewOfferController {
 	@FXML
 	private TextField priceText;
 	@FXML
-	private DatePicker datePicker;
-	@FXML
 	private Button addButton;
 	@FXML
 	private Button closeButton;
 
-	private int id;
+	private DeckFull df;
 
-	public void setValue(int id){
-		this.id = id;
+	public void setValue(DeckFull df){
+		this.df = df;
 	}
 
 	@FXML
@@ -44,7 +42,7 @@ public class NewOfferController {
 			BidderDAO.insertBidder(bidderText.getText(),"");
 			bidder = BidderDAO.searchBidderName(bidderText.getText());
 		} 
-		OfferDAO.insertOffer(String.valueOf(bidder.getId()), priceText.getText(), String.valueOf(this.id),  datePicker.getValue().toString(), "");
+		OfferDAO.insertOffer(String.valueOf(bidder.getId()), priceText.getText(), String.valueOf(df.getId()),  String.valueOf(df.getDate()), "");
 
 		System.out.println("Offer added successfully");
 		Stage stage = (Stage) closeButton.getScene().getWindow();

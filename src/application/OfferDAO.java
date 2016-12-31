@@ -109,7 +109,7 @@ public class OfferDAO {
 	
 	public static ResultSet allOfferForDeck(DeckFull df) throws SQLException, ClassNotFoundException {
 		String selectStmt =
-				"SELECT o.Date, o.Price, b.Name FROM Deck d LEFT JOIN Offer o on d.ID = o.DeckID left join Bidder b on o.BidderID = b.ID WHERE o.DeckID = "+ df.getId();
+				"SELECT o.Date, o.Price, b.Name, d.WinningOffer, o.ID FROM Deck d LEFT JOIN Offer o on d.ID = o.DeckID left join Bidder b on o.BidderID = b.ID WHERE o.DeckID = "+ df.getId() +" ORDER BY o.Price DESC";
 
 		//Execute SELECT statement
 		try {

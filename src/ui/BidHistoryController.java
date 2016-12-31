@@ -52,6 +52,9 @@ public class BidHistoryController implements Initializable{
 			if(i % 2 == 0){
 				flowPane.setStyle("-fx-background-color: #D7DBDD");
 			}
+			if(rs.getInt("WinningOffer") == rs.getInt("ID")){
+				flowPane.setStyle("-fx-background-color: #F6AA3D");
+			}
 			// Get the Controller from the FXMLLoader
 			BidHistoryFrameController controller = loader.getController();
 			// Set data in the controller

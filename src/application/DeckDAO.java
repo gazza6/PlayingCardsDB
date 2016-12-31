@@ -140,7 +140,7 @@ public class DeckDAO {
 
 	public static ObservableList<DeckFull> deckDetail(String order) throws SQLException, ClassNotFoundException {
 		String originalStmt =
-				"SELECT d.ID, o.ID as OfferID, d.Name, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date FROM Deck d LEFT JOIN Offer o on d.ID = o.DeckID left join Bidder b on o.BidderID = b.ID ";
+				"SELECT d.ID, o.ID as OfferID, d.Name, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date FROM Deck d LEFT JOIN Offer o on d.WinningOffer = o.ID left join Bidder b on o.BidderID = b.ID ";
 		String selectStmt = null;
 
 		switch(order){

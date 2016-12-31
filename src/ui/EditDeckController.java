@@ -90,7 +90,7 @@ public class EditDeckController implements Initializable{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewOffer.fxml"));
 		AnchorPane flowPane = fxmlLoader.load();
 		NewOfferController controller = fxmlLoader.getController();
-		controller.setValue(df.getId());
+		controller.setValue(df);
 		
 		Stage stage = new Stage();
 		stage.setTitle("New bid offer");
