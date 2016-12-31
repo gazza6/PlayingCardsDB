@@ -75,7 +75,7 @@ public class BidderIndexController implements Initializable{
 				// Get the Controller from the FXMLLoader
 				DeckFrameController controller = loader.getController();
 				// Set data in the controller
-				controller.setValues(decks);
+				//controller.setValues(decks);
 				deckBox.getChildren().add(flowPane);
 				i++;
 			}

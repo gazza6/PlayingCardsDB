@@ -89,6 +89,28 @@ public class DeckDAO {
 		return deckList;
 	}
 
+	//Select * from employees operation
+	private static ObservableList<DeckFull> getDeckFullList(ResultSet rs) throws SQLException, ClassNotFoundException {
+		//Declare a observable List which comprises of Employee objects
+		ObservableList<DeckFull> deckList = FXCollections.observableArrayList();
+
+		while (rs.next()) {
+			DeckFull deck = new DeckFull();
+			deck.setId(rs.getInt("ID"));
+			deck.setName(rs.getString("Name"));
+			deck.setDeckCondition(rs.getInt("DeckCondition"));
+			deck.setPrice(rs.getDouble("Price"));
+			deck.setbidderName(rs.getString("BidderName"));
+			deck.setDate(rs.getDate("Date"));
+			deck.setImage(rs.getBinaryStream("Image"));
+			deck.setRemark(rs.getString("Remark"));
+			//Add employee to the ObservableList
+			deckList.add(deck);
+		}
+		//return empList (ObservableList of Employees)
+		return deckList;
+	}
+
 	//*************************************
 	//Update a deck
 	//*************************************
@@ -116,11 +138,11 @@ public class DeckDAO {
 		}
 	}
 
-	public static ResultSet deckDetail(String order) throws SQLException, ClassNotFoundException {
+	public static ObservableList<DeckFull> deckDetail(String order) throws SQLException, ClassNotFoundException {
 		String originalStmt =
 				"SELECT d.ID, o.ID as OfferID, d.Name, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date FROM Deck d LEFT JOIN Offer o on d.ID = o.DeckID left join Bidder b on o.BidderID = b.ID ";
 		String selectStmt = null;
-		
+
 		switch(order){
 		case "Earliest added": selectStmt = originalStmt; break;
 		case "Latest added": selectStmt = originalStmt + "ORDER BY d.ID DESC"; break;
@@ -134,25 +156,30 @@ public class DeckDAO {
 		try {
 			//Get ResultSet from dbExecuteQuery method
 			ResultSet rsDeck = DBUtil.dbExecuteQuery(selectStmt);
-			return rsDeck;
+
+			ObservableList<DeckFull> deckList = getDeckFullList(rsDeck);
+			
+			return deckList;
 		} catch (SQLException e) {
 			System.out.println("While sorting all decks infomation, an error occurred: " + e);
 			//Return exception
 			throw e;
 		}
 	}
-	
-	public static ResultSet search(String searchWord) throws SQLException, ClassNotFoundException {
+
+	public static ObservableList<DeckFull> search(String searchWord) throws SQLException, ClassNotFoundException {
 		String originalStmt =
 				"SELECT d.ID, d.Name, o.ID as OfferID, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date FROM Deck d LEFT JOIN Offer o on d.ID = o.DeckID left join Bidder b on o.BidderID = b.ID "
-				+"WHERE(d.Name LIKE '%"+searchWord+"%' OR b.Name LIKE '%"+searchWord+"%')";
-		
+						+"WHERE(d.Name LIKE '%"+searchWord+"%' OR b.Name LIKE '%"+searchWord+"%')";
+
 
 		//Execute SELECT statement
 		try {
 			//Get ResultSet from dbExecuteQuery method
 			ResultSet rsDeck = DBUtil.dbExecuteQuery(originalStmt);
-			return rsDeck;
+ObservableList<DeckFull> deckList = getDeckFullList(rsDeck);
+			
+			return deckList;
 		} catch (SQLException e) {
 			System.out.println("While searching for all decks infomation, an error occurred: " + e);
 			//Return exception
@@ -160,74 +187,74 @@ public class DeckDAO {
 		}
 	}
 
-		//*************************************
-		//INSERT a deck with no winning bid
-		//*************************************
-		public static void insertDeck (String name, String condition, FileInputStream fin, String remark) throws SQLException, ClassNotFoundException {
-			//Declare a INSERT statement
+	//*************************************
+	//INSERT a deck with no winning bid
+	//*************************************
+	public static void insertDeck (String name, String condition, FileInputStream fin, String remark) throws SQLException, ClassNotFoundException {
+		//Declare a INSERT statement
 
-			// To do 
+		// To do 
 
-			String updateStmt =
-					"INSERT INTO Deck\n" +
-							"(Name, DeckCondition, Remark)\n" +
-							"VALUES\n" +
-							"('"+name+"', "+condition+","+fin+", '"+remark+"')";
+		String updateStmt =
+				"INSERT INTO Deck\n" +
+						"(Name, DeckCondition, Remark)\n" +
+						"VALUES\n" +
+						"('"+name+"', "+condition+","+fin+", '"+remark+"')";
 
-			//Execute DELETE operation
-			try {
-				DBUtil.dbExecuteUpdate(updateStmt);
-			} catch (SQLException e) {
-				throw e;
-			}
+		//Execute DELETE operation
+		try {
+			DBUtil.dbExecuteUpdate(updateStmt);
+		} catch (SQLException e) {
+			throw e;
 		}
-
-		//*************************************
-		//Update a deck's winning offer number
-		//*************************************
-		public static void updateDeckWinningOffer (String id, String winningOffer) throws SQLException, ClassNotFoundException {
-			//Declare a INSERT statement
-
-			// To do 
-
-			String updateStmt =
-					"UPDATE Deck\n" +
-							"SET WinningOffer = '" + winningOffer + "'\n" +
-							"WHERE ID = " + id;
-
-			//Execute DELETE operation
-			try {
-				DBUtil.dbExecuteUpdate(updateStmt);
-			} catch (SQLException e) {
-				throw e;
-			}
-		}
-
-		//*************************************
-		//Update a deck
-		//*************************************
-		public static void updateDeck (String id, String name,String winningOffer, String condition, String remark) throws SQLException, ClassNotFoundException {
-			//Declare a INSERT statement
-
-			// To do 
-
-			String updateStmt =
-					"BEGIN\n" +
-							"UPDATE Deck\n" +
-							"SET Name = '" + name + "', WinningOffer = '"+ winningOffer+ 
-							"', DeckCondition = '"+ condition+ 
-							"', Remark = '"+ remark+ "'\n" +
-							"    WHERE ID = " + id + ";\n" +
-							"   COMMIT;\n" +
-							"END;";
-
-			//Execute DELETE operation
-			try {
-				DBUtil.dbExecuteUpdate(updateStmt);
-			} catch (SQLException e) {
-				throw e;
-			}
-		}
-
-
 	}
+
+	//*************************************
+	//Update a deck's winning offer number
+	//*************************************
+	public static void updateDeckWinningOffer (String id, String winningOffer) throws SQLException, ClassNotFoundException {
+		//Declare a INSERT statement
+
+		// To do 
+
+		String updateStmt =
+				"UPDATE Deck\n" +
+						"SET WinningOffer = '" + winningOffer + "'\n" +
+						"WHERE ID = " + id;
+
+		//Execute DELETE operation
+		try {
+			DBUtil.dbExecuteUpdate(updateStmt);
+		} catch (SQLException e) {
+			throw e;
+		}
+	}
+
+	//*************************************
+	//Update a deck
+	//*************************************
+	public static void updateDeck (String id, String name,String winningOffer, String condition, String remark) throws SQLException, ClassNotFoundException {
+		//Declare a INSERT statement
+
+		// To do 
+
+		String updateStmt =
+				"BEGIN\n" +
+						"UPDATE Deck\n" +
+						"SET Name = '" + name + "', WinningOffer = '"+ winningOffer+ 
+						"', DeckCondition = '"+ condition+ 
+						"', Remark = '"+ remark+ "'\n" +
+						"    WHERE ID = " + id + ";\n" +
+						"   COMMIT;\n" +
+						"END;";
+
+		//Execute DELETE operation
+		try {
+			DBUtil.dbExecuteUpdate(updateStmt);
+		} catch (SQLException e) {
+			throw e;
+		}
+	}
+
+
+}

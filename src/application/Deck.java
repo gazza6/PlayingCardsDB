@@ -1,5 +1,6 @@
 package application;
 
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class Deck {
 	private StringProperty name;
 	private IntegerProperty winningOffer;
 	private IntegerProperty deckCondition;
-	private SimpleObjectProperty<Blob> image;
+	private SimpleObjectProperty<InputStream> image;
 	private StringProperty remark;
 
 	public Deck(){
@@ -26,6 +27,7 @@ public class Deck {
 		this.winningOffer = new SimpleIntegerProperty();
 		this.deckCondition = new SimpleIntegerProperty();
 		this.remark = new SimpleStringProperty();
+		this.image = new SimpleObjectProperty();
 	}
 
 	// id
@@ -73,15 +75,15 @@ public class Deck {
 	}
 
 	// image
-	public Object getImage() {
+	public InputStream getImage() {
 		return image.get();
 	}
 
-	public void setImage(Blob image) {
-		this.image.set(image);
+	public void setImage(InputStream inputStream) {
+		this.image.set(inputStream);
 	}
 	
-	public SimpleObjectProperty<Blob> imageProperty() {
+	public SimpleObjectProperty<InputStream> imageProperty() {
         return image;
     }
 

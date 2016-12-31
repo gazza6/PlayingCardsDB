@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import application.DeckFull;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,7 +21,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class EditDeckController {
-	
+
 	Stage prevStage;
 
 	@FXML
@@ -49,24 +50,24 @@ public class EditDeckController {
 	private Button photoButton;
 	@FXML
 	private Button addBidsButton;
-	
+
 	final FileChooser fileChooser = new FileChooser();
 	private FileInputStream photoStream;
 	private File file;
-	
+
 	public void setPrevStage(Stage stage) {
 		this.prevStage = stage;
 
 	}
-	
-	public void setValues(ResultSet rs){
-		
+
+	public void setValues(DeckFull df){
+
 	}
-	
-public void addBids(){
-		
+
+	public void addBids(){
+
 	}
-	
+
 	@FXML
 	private void addPhoto (ActionEvent actionEvent) throws ClassNotFoundException, SQLException, FileNotFoundException {
 		File file = fileChooser.showOpenDialog(prevStage);

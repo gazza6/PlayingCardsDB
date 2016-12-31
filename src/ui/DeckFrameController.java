@@ -3,11 +3,13 @@ package ui;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import application.Deck;
+import application.DeckFull;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -51,7 +53,7 @@ public class DeckFrameController implements Initializable{
 
 	@FXML
 	private Button editButton;
-	
+
 	@FXML
 	private Button historyButton;
 
@@ -61,41 +63,39 @@ public class DeckFrameController implements Initializable{
 	@FXML
 	private ImageView imageView;
 	
-	private ResultSet rs;
+	private DeckFull deckFull;
 
 	public void setPrevStage(Stage stage) {
 		this.prevStage = stage;
 	}
 
-	public void setValues(ResultSet rs) throws SQLException{
-		this.rs = rs;
- 
-		deckNameLabel.setText(rs.getString("Name"));
-		priceLabel.setText(rs.getString("Price"));
-		bidderNamerLabel.setText(rs.getString("BidderName"));
-		conditionLabel.setText(rs.getString("DeckCondition"));
-		dateLabel.setText(rs.getDate("Date").toString());
-		InputStream imgStream = rs.getBinaryStream("Image"); 
+	public void setValues(DeckFull d) throws SQLException{
+		deckNameLabel.setText(d.getName());
+		priceLabel.setText(String.valueOf(d.getPrice()));
+		bidderNamerLabel.setText(d.getBidderName());
+		conditionLabel.setText(String.valueOf(d.getDeckCondition()));
+		dateLabel.setText(d.getDate().toString());
+		InputStream imgStream = d.getImage(); 
 		if(imgStream != null){
 			Image image = new Image(imgStream);
 			imageView.setImage(image);
 		}
-		remarkArea.setText(rs.getString("Remark"));
+		remarkArea.setText(d.getRemark());
 	}
-	
+
 	@FXML
 	public void viewHistory() throws IOException, SQLException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BidHistory.fxml"));
 		AnchorPane flowPane = fxmlLoader.load();
-        BidHistoryController controller = fxmlLoader.getController();
-        controller.setValue();
-        
-        Stage stage = new Stage();
-        stage.setTitle("Bid history");
-        stage.setScene(new Scene(flowPane));  
-        stage.show();
+		BidHistoryController controller = fxmlLoader.getController();
+		controller.setValue();
+
+		Stage stage = new Stage();
+		stage.setTitle("Bid history");
+		stage.setScene(new Scene(flowPane));  
+		stage.show();
 	}
-	
+
 	@FXML
 	public void editDeck() throws IOException {
 		int i = 0;
@@ -107,7 +107,7 @@ public class DeckFrameController implements Initializable{
 		// Get the Controller from the FXMLLoader
 		EditDeckController controller = loader.getController();
 		// Set data in the controller
-		controller.setValues(this.rs);
+		controller.setValues(deckFull);
 	}
 
 	@Override

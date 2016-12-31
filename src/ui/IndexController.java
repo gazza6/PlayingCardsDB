@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import application.Deck;
 import application.DeckDAO;
+import application.DeckFull;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -96,7 +97,7 @@ public class IndexController implements Initializable {
 	
 	private void fillDecks(String order) throws SQLException, IOException, ClassNotFoundException{
 		deckBox.getChildren().clear();
-		ResultSet decks = DeckDAO.deckDetail(order);
+		ObservableList<DeckFull> decks = DeckDAO.deckDetail(order);
 		fill(decks);
 	}
 	
@@ -104,13 +105,13 @@ public class IndexController implements Initializable {
 	private void search() throws ClassNotFoundException, SQLException, IOException{
 		deckBox.getChildren().clear();
 		String searchWord = searchField.getText();
-		ResultSet decks = DeckDAO.search(searchWord);
+		ObservableList<DeckFull> decks = DeckDAO.search(searchWord);
 		fill(decks);
 	}
 	
-	private void fill(ResultSet rs) throws SQLException, IOException, ClassNotFoundException{
+	private void fill(ObservableList<DeckFull> decks) throws SQLException, IOException, ClassNotFoundException{
 		int i = 0;
-		while(rs.next()){
+		for(DeckFull d : decks){
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("DeckFrame.fxml"));
 			AnchorPane flowPane = loader.load();
 			if(i % 2 == 0){
@@ -119,7 +120,7 @@ public class IndexController implements Initializable {
 			// Get the Controller from the FXMLLoader
 			DeckFrameController controller = loader.getController();
 			// Set data in the controller
-			controller.setValues(rs);
+			controller.setValues(d);
 			deckBox.getChildren().add(flowPane);
 			i++;
 		}
