@@ -107,6 +107,22 @@ public class OfferDAO {
 		}
 	}
 	
+	public static ResultSet allOfferForDeck(DeckFull df) throws SQLException, ClassNotFoundException {
+		String selectStmt =
+				"SELECT o.Date, o.Price, b.Name FROM Deck d LEFT JOIN Offer o on d.ID = o.DeckID left join Bidder b on o.BidderID = b.ID WHERE o.DeckID = "+ df.getId();
+
+		//Execute SELECT statement
+		try {
+			//Get ResultSet from dbExecuteQuery method
+			ResultSet rsDeck = DBUtil.dbExecuteQuery(selectStmt);
+			return rsDeck;
+		} catch (SQLException e) {
+			System.out.println("While searching for all decks infomation, an error occurred: " + e);
+			//Return exception
+			throw e;
+		}
+	}
+	
 	public static Offer latesetOffer () throws SQLException, ClassNotFoundException {
 		//Declare a SELECT statement
 		String selectStmt = "SELECT * FROM Offer ORDER BY ID DESC LIMIT 0, 1";

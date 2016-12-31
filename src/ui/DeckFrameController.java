@@ -3,8 +3,6 @@ package ui;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.sql.Blob;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -21,6 +19,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -29,9 +28,6 @@ import javafx.stage.StageStyle;
 public class DeckFrameController implements Initializable{
 
 	Stage prevStage;
-
-	@FXML
-	private AnchorPane pane  = new AnchorPane();
 
 	@FXML
 	private Label deckNameLabel;
@@ -69,27 +65,28 @@ public class DeckFrameController implements Initializable{
 		this.prevStage = stage;
 	}
 
-	public void setValues(DeckFull d) throws SQLException{
-		deckNameLabel.setText(d.getName());
-		priceLabel.setText(String.valueOf(d.getPrice()));
-		bidderNamerLabel.setText(d.getBidderName());
-		conditionLabel.setText(String.valueOf(d.getDeckCondition()));
-		dateLabel.setText(d.getDate().toString());
-		InputStream imgStream = d.getImage(); 
+	public void setValues(DeckFull df) throws SQLException{
+		this.deckFull = df;
+		deckNameLabel.setText(df.getName());
+		priceLabel.setText(String.valueOf(df.getPrice()));
+		bidderNamerLabel.setText(df.getBidderName());
+		conditionLabel.setText(String.valueOf(df.getDeckCondition()));
+		dateLabel.setText(df.getDate().toString());
+		InputStream imgStream = df.getImage(); 
 		if(imgStream != null){
 			Image image = new Image(imgStream);
 			imageView.setImage(image);
 		}
-		remarkArea.setText(d.getRemark());
+		remarkArea.setText(df.getRemark());
 	}
 
 	@FXML
-	public void viewHistory() throws IOException, SQLException {
+	public void viewHistory() throws IOException, SQLException, ClassNotFoundException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BidHistory.fxml"));
 		AnchorPane flowPane = fxmlLoader.load();
 		BidHistoryController controller = fxmlLoader.getController();
-		controller.setValue();
-
+		System.out.println("deckName test: "+deckFull.getName());
+		controller.setValue(deckFull);
 		Stage stage = new Stage();
 		stage.setTitle("Bid history");
 		stage.setScene(new Scene(flowPane));  
@@ -98,16 +95,14 @@ public class DeckFrameController implements Initializable{
 
 	@FXML
 	public void editDeck() throws IOException {
-		int i = 0;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("EditDeck.fxml"));
 		AnchorPane flowPane = loader.load();
-		if(i % 2 == 0){
-			flowPane.setStyle("-fx-background-color: #D7DBDD");
-		}
 		// Get the Controller from the FXMLLoader
 		EditDeckController controller = loader.getController();
 		// Set data in the controller
 		controller.setValues(deckFull);
+		BorderPane border = Start.getRoot();
+		border.setCenter(flowPane);
 	}
 
 	@Override

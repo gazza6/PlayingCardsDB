@@ -1,6 +1,8 @@
 package ui;
 
-import application.Offer;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -22,8 +24,10 @@ public class BidHistoryFrameController {
 		this.prevStage = stage;
 	}
 	
-	public void setValue(){
-		
+	public void setValue(ResultSet rs) throws SQLException{
+		nameLabel.setText(rs.getString("Name"));
+		priceLabel.setText(rs.getString("Price"));
+		dateLabel.setText(rs.getDate("Date").toString());
 	}
 
 }

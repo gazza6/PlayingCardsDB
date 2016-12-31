@@ -14,6 +14,7 @@ public class Offer {
 
 	private IntegerProperty id;
 	private IntegerProperty bidderID;
+	private StringProperty bidderName;
 	private DoubleProperty price;
 	private IntegerProperty deckID;
 	private SimpleObjectProperty<Date> date;
@@ -22,6 +23,7 @@ public class Offer {
 	public Offer() {
 		this.id = new SimpleIntegerProperty();
 		this.bidderID = new SimpleIntegerProperty();
+		this.bidderName = new SimpleStringProperty();
 		this.price = new SimpleDoubleProperty();
 		this.deckID = new SimpleIntegerProperty();
 		this.date = new SimpleObjectProperty<>();
@@ -94,5 +96,16 @@ public class Offer {
 	}
 	public StringProperty remarkProperty(){
 		return remark;
+	}
+
+	// name
+	public String getBidderName() {
+		return bidderName.get();
+	}
+	public void setbidderName(String name) {
+		this.bidderName.set(name);;
+	}
+	public StringProperty bidderNameProperty(){
+		return bidderName;
 	}
 }

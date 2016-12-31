@@ -9,13 +9,28 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.BidHistoryController">
    <children>
-      <ScrollPane layoutX="7.0" layoutY="234.0" prefHeight="532.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <ScrollPane layoutX="7.0" layoutY="234.0" prefHeight="470.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <content>
-            <VBox prefHeight="200.0" prefWidth="100.0" />
+            <VBox fx:id="offerVBox" prefHeight="470.0" prefWidth="700.0" />
          </content>
       </ScrollPane>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="411.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <Label layoutX="69.0" layoutY="74.0" prefHeight="30.0" prefWidth="100.0">
+      <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="411.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="nameLabel" layoutX="69.0" layoutY="74.0" prefHeight="50.0" prefWidth="300.0">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="191.0" text="Bidder Name:" AnchorPane.leftAnchor="50.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="301.0" layoutY="191.0" text="Price:" AnchorPane.leftAnchor="300.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="547.0" layoutY="191.0" text="Date:" AnchorPane.leftAnchor="500.0">
          <font>
             <Font size="18.0" />
          </font>

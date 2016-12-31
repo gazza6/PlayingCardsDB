@@ -3,12 +3,18 @@ package ui;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import application.DeckFull;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -17,10 +23,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class EditDeckController {
+public class EditDeckController implements Initializable{
 
 	Stage prevStage;
 
@@ -61,21 +69,53 @@ public class EditDeckController {
 	}
 
 	public void setValues(DeckFull df){
+		deckText.setText(df.getName());
+		priceText.setText(String.valueOf(df.getPrice()));
+		bidderText.setText(df.getBidderName());
+		remarkText.setText(df.getRemark());
+		InputStream imgStream = df.getImage(); 
 
+		if(imgStream != null){
+			Image image = new Image(imgStream);
+			imageView.setImage(image);
+		}
+		conditionCombo.getSelectionModel().select(5-df.getDeckCondition());
 	}
 
 	public void addBids(){
 
 	}
+	
+	@FXML
+	private void editDeck (ActionEvent actionEvent) throws IOException{
+		
+	}
+	
+	@FXML
+	private void back (ActionEvent actionEvent) throws IOException{
+		URL paneUrl = getClass().getResource("Index.fxml");
+		AnchorPane pane = FXMLLoader.load( paneUrl );
+
+		BorderPane border = Start.getRoot();
+		border.setCenter(pane);
+	}
 
 	@FXML
 	private void addPhoto (ActionEvent actionEvent) throws ClassNotFoundException, SQLException, FileNotFoundException {
 		File file = fileChooser.showOpenDialog(prevStage);
-		System.out.println(file.toURI().toString());
-		Image image = new Image(file.toURI().toString());
-		imageView.setImage(image);
-		this.photoStream = new FileInputStream ( file );
-		this.file = file;
+
+		if(file != null){
+			Image image = new Image(file.toURI().toString());
+			imageView.setImage(image);
+			this.photoStream = new FileInputStream ( file );
+			this.file = file;
+		}
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		conditionCombo.getItems().setAll("5", "4", "3", "2", "1");
+
 	}
 
 }
