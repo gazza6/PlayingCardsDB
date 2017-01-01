@@ -65,7 +65,7 @@ public class DeckFrameController {
 		this.prevStage = stage;
 	}
 
-	public void setValues(DeckFull df) throws SQLException{
+	public void setValues(DeckFull df){
 		this.deckFull = df;
 		deckNameLabel.setText(df.getName());
 		priceLabel.setText(String.valueOf(df.getPrice()));
@@ -77,6 +77,7 @@ public class DeckFrameController {
 			Image image = new Image(imgStream);
 			imageView.setImage(image);
 		}
+		
 		remarkArea.setText(df.getRemark());
 	}
 

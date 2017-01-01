@@ -12,7 +12,11 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ResourceBundle;
 
+import application.Bidder;
+import application.BidderDAO;
+import application.DeckDAO;
 import application.DeckFull;
+import application.OfferDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -84,8 +88,10 @@ public class EditDeckController implements Initializable{
 		InputStream imgStream = df.getImage(); 
 		if(imgStream != null){
 			Image image = new Image(imgStream);
+			//Image image = new Image("file:/Users/shenghaolu/Downloads/browngn.jpg");			
 			imageView.setImage(image);
 		}
+
 	}
 
 	public void addBids() throws IOException{
@@ -101,8 +107,19 @@ public class EditDeckController implements Initializable{
 	}
 
 	@FXML
-	private void editDeck (ActionEvent actionEvent) throws IOException{
-
+	private void editDeck (ActionEvent actionEvent) throws IOException, ClassNotFoundException, SQLException{
+		Bidder bidder = BidderDAO.searchBidderName(bidderText.getText());
+		if(bidder == null){
+			BidderDAO.insertBidder(bidderText.getText(),"");
+			bidder = BidderDAO.searchBidderName(bidderText.getText());
+		} 
+		String bidderID = String.valueOf(bidder.getId());
+		
+		OfferDAO.updateOffer(String.valueOf(df.getWinningOffer()), bidderID, priceText.getText(), datePicker.getValue().toString());
+		
+		DeckDAO.updateDeck(String.valueOf(df.getId()), deckText.getText(), conditionCombo.getSelectionModel().getSelectedItem().toString(), remarkText.getText());
+		
+		System.out.println("Edit successfully");
 	}
 
 	@FXML

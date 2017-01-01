@@ -167,21 +167,15 @@ public class OfferDAO {
 	//*************************************
 	//Update an offer
 	//*************************************
-	public static void updateOffer (String id, String bidderID, String price, String deckID, String date, String remark) throws SQLException, ClassNotFoundException {
+	public static void updateOffer (String id, String bidderID, String price, String date) throws SQLException, ClassNotFoundException {
 		//Declare a INSERT statement
 
-		// To do 
-
 		String updateStmt =
-				"BEGIN\n" +
 						"UPDATE Offer\n" +
-						"SET BidderID = '" + bidderID + "', Price = '"+ price+ 
-						"', DeckID = '"+ deckID+ 
+						"SET Price = '"+ price+ 
+						"', BidderID = '"+ bidderID+ 
 						"', Date = '"+ date + 
-						"', Remark = '"+ remark+ "'\n" +
-						"    WHERE ID = " + id + ";\n" +
-						"   COMMIT;\n" +
-						"END;";
+						"' WHERE ID = " + id;
 
 		//Execute DELETE operation
 		try {

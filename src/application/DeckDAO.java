@@ -104,6 +104,7 @@ public class DeckDAO {
 			deck.setDate(rs.getDate("Date"));
 			deck.setImage(rs.getBinaryStream("Image"));
 			deck.setRemark(rs.getString("Remark"));
+			deck.setWinningOffer(rs.getInt("WinningOffer"));
 			//Add employee to the ObservableList
 			deckList.add(deck);
 		}
@@ -140,7 +141,7 @@ public class DeckDAO {
 
 	public static ObservableList<DeckFull> deckDetail(String order) throws SQLException, ClassNotFoundException {
 		String originalStmt =
-				"SELECT d.ID, o.ID as OfferID, d.Name, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date FROM Deck d LEFT JOIN Offer o on d.WinningOffer = o.ID left join Bidder b on o.BidderID = b.ID ";
+				"SELECT d.ID, o.ID as OfferID, d.Name, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date, d.WinningOffer FROM Deck d LEFT JOIN Offer o on d.WinningOffer = o.ID left join Bidder b on o.BidderID = b.ID ";
 		String selectStmt = null;
 
 		switch(order){
@@ -158,7 +159,7 @@ public class DeckDAO {
 			ResultSet rsDeck = DBUtil.dbExecuteQuery(selectStmt);
 
 			ObservableList<DeckFull> deckList = getDeckFullList(rsDeck);
-			
+
 			return deckList;
 		} catch (SQLException e) {
 			System.out.println("While sorting all decks infomation, an error occurred: " + e);
@@ -169,7 +170,7 @@ public class DeckDAO {
 
 	public static ObservableList<DeckFull> search(String searchWord) throws SQLException, ClassNotFoundException {
 		String originalStmt =
-				"SELECT d.ID, d.Name, o.ID as OfferID, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date FROM Deck d LEFT JOIN Offer o on d.ID = o.DeckID left join Bidder b on o.BidderID = b.ID "
+				"SELECT d.ID, d.Name, o.ID as OfferID, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date, d.WinningOffer FROM Deck d LEFT JOIN Offer o on d.ID = o.DeckID left join Bidder b on o.BidderID = b.ID "
 						+"WHERE(d.Name LIKE '%"+searchWord+"%' OR b.Name LIKE '%"+searchWord+"%')";
 
 
@@ -177,8 +178,8 @@ public class DeckDAO {
 		try {
 			//Get ResultSet from dbExecuteQuery method
 			ResultSet rsDeck = DBUtil.dbExecuteQuery(originalStmt);
-ObservableList<DeckFull> deckList = getDeckFullList(rsDeck);
-			
+			ObservableList<DeckFull> deckList = getDeckFullList(rsDeck);
+
 			return deckList;
 		} catch (SQLException e) {
 			System.out.println("While searching for all decks infomation, an error occurred: " + e);
@@ -233,20 +234,16 @@ ObservableList<DeckFull> deckList = getDeckFullList(rsDeck);
 	//*************************************
 	//Update a deck
 	//*************************************
-	public static void updateDeck (String id, String name,String winningOffer, String condition, String remark) throws SQLException, ClassNotFoundException {
+	public static void updateDeck (String id, String name, String condition, String remark) throws SQLException, ClassNotFoundException {
 		//Declare a INSERT statement
 
 		// To do 
 
 		String updateStmt =
-				"BEGIN\n" +
-						"UPDATE Deck\n" +
-						"SET Name = '" + name + "', WinningOffer = '"+ winningOffer+ 
-						"', DeckCondition = '"+ condition+ 
+				"UPDATE Deck\n" +
+						"SET Name = '" + name + "', DeckCondition = '"+ condition+ 
 						"', Remark = '"+ remark+ "'\n" +
-						"    WHERE ID = " + id + ";\n" +
-						"   COMMIT;\n" +
-						"END;";
+						"    WHERE ID = " + id;
 
 		//Execute DELETE operation
 		try {

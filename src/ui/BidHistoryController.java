@@ -39,7 +39,7 @@ public class BidHistoryController implements Initializable{
 		nameLabel.setText(df.getName());
 		InputStream imgStream = df.getImage(); 
 		if(imgStream != null){
-			Image image = new Image("file:/Users/shenghaolu/Downloads/browngn.JPG");
+			Image image = new Image(imgStream);
 			imageView.setImage(image);
 		}
 		int i = 0;
