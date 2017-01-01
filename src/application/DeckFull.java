@@ -48,7 +48,7 @@ public class DeckFull extends Deck{
 	}
 
 	//hire_date
-	public Object getDate(){
+	public Date getDate(){
 		return date.get();
 	}
 

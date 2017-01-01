@@ -75,7 +75,7 @@ public class Offer {
 	}
 
 	//hire_date
-	public Object getDate(){
+	public Date getDate(){
 		return date.get();
 	}
 

@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ResourceBundle;
 
 import application.DeckFull;
@@ -59,7 +61,7 @@ public class EditDeckController implements Initializable{
 	private Button photoButton;
 	@FXML
 	private Button addBidsButton;
-	
+
 	private DeckFull df;
 
 	final FileChooser fileChooser = new FileChooser();
@@ -77,13 +79,13 @@ public class EditDeckController implements Initializable{
 		priceText.setText(String.valueOf(df.getPrice()));
 		bidderText.setText(df.getBidderName());
 		remarkText.setText(df.getRemark());
+		conditionCombo.getSelectionModel().select(5-df.getDeckCondition());
+		datePicker.setValue(df.getDate().toLocalDate());
 		InputStream imgStream = df.getImage(); 
-
 		if(imgStream != null){
 			Image image = new Image(imgStream);
 			imageView.setImage(image);
 		}
-		conditionCombo.getSelectionModel().select(5-df.getDeckCondition());
 	}
 
 	public void addBids() throws IOException{
@@ -91,18 +93,18 @@ public class EditDeckController implements Initializable{
 		AnchorPane flowPane = fxmlLoader.load();
 		NewOfferController controller = fxmlLoader.getController();
 		controller.setValue(df);
-		
+
 		Stage stage = new Stage();
 		stage.setTitle("New bid offer");
 		stage.setScene(new Scene(flowPane));  
 		stage.show();
 	}
-	
+
 	@FXML
 	private void editDeck (ActionEvent actionEvent) throws IOException{
-		
+
 	}
-	
+
 	@FXML
 	private void back (ActionEvent actionEvent) throws IOException{
 		URL paneUrl = getClass().getResource("Index.fxml");
@@ -127,7 +129,6 @@ public class EditDeckController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		conditionCombo.getItems().setAll("5", "4", "3", "2", "1");
-
 	}
 
 }
