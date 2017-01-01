@@ -49,7 +49,7 @@ public class EditBidderController {
 	
 	@FXML
 	void switchToViewBidder(ActionEvent event) throws IOException {
-		URL paneUrl = getClass().getResource("ScrollPane.fxml");
+		URL paneUrl = getClass().getResource("BidderIndex.fxml");
 		AnchorPane pane = FXMLLoader.load( paneUrl );
 
 		BorderPane border = Start.getRoot();

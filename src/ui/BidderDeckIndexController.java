@@ -1,15 +1,13 @@
 package ui;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import application.Bidder;
-import application.BidderDAO;
 import application.DeckDAO;
-import javafx.collections.ObservableList;
+import application.OfferDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,9 +20,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class BidderIndexController implements Initializable{
+public class BidderDeckIndexController implements Initializable{
 	
-Stage prevStage;
+	Stage prevStage;
 	
 	@FXML
 	private Label nameLabel;
@@ -37,37 +35,44 @@ Stage prevStage;
 
 	@FXML
 	private Button searchButton;
-	
+
 	@FXML
 	private VBox deckBox = new VBox();
 	
+	private Bidder bidder;
+
 	@FXML
 	ScrollPane scroller = new ScrollPane(deckBox);
 
+	public void setPrevStage(Stage stage) {
+		this.prevStage = stage;
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		sortBox.getItems().setAll("Latest added", "Earliest added", "Oldest first", "Newest first", "A > Z", "Z > A");
+		sortBox.getItems().setAll("Oldest first", "Newest first", "A > Z", "Z > A");
 		sortBox.getSelectionModel().selectFirst();
-		
 		scroller.setFitToWidth(true);
-		
 	}
 	
-	public void setBidderValue(){
+	@FXML
+	public void bidderAllOffers(Bidder bidder){
+		this.bidder = bidder;
+		nameLabel.setText(bidder.getName());
 		try {
-			ObservableList<Bidder> bidders = BidderDAO.searchBidders();
+			ResultSet decks = OfferDAO.allOfferForBidder(bidder);
 			int i = 0;
 
-			for(Bidder b : bidders){
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("BidderFrame.fxml"));
+			while(decks.next()){
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("DeckFrame.fxml"));
 				AnchorPane flowPane = loader.load();
 				if(i % 2 == 0){
 					flowPane.setStyle("-fx-background-color: #D7DBDD");
 				}
 				// Get the Controller from the FXMLLoader
-				BidderFrameController controller = loader.getController();
+				DeckFrameController controller = loader.getController();
 				// Set data in the controller
-				controller.setValues(b);
+				//controller.setValues(decks);
 				deckBox.getChildren().add(flowPane);
 				i++;
 			}
@@ -75,7 +80,7 @@ Stage prevStage;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 	}
 
 }
