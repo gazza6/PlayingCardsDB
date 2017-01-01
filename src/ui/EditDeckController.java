@@ -6,8 +6,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ResourceBundle;
@@ -117,8 +121,34 @@ public class EditDeckController implements Initializable{
 		
 		OfferDAO.updateOffer(String.valueOf(df.getWinningOffer()), bidderID, priceText.getText(), datePicker.getValue().toString());
 		
+		if(photoStream == null){
 		DeckDAO.updateDeck(String.valueOf(df.getId()), deckText.getText(), conditionCombo.getSelectionModel().getSelectedItem().toString(), remarkText.getText());
-		
+		} else {
+			try {
+				Class.forName("com.mysql.jdbc.Driver");  
+				Connection conn=DriverManager.getConnection(  
+						"jdbc:mysql://localhost:3306/Cards","root","root");  
+				System.out.println("connected");
+				Statement stmt = conn.createStatement();
+				String updateStmt =
+						"UPDATE Deck Set Name = ?, DeckCondition = ?, Image = ?, Remark = ? WHERE ID = ?";
+								
+				PreparedStatement ps = conn.prepareStatement(updateStmt);
+				ps.setString(1, deckText.getText());
+				ps.setInt(2, Integer.parseInt(conditionCombo.getSelectionModel().getSelectedItem().toString()));
+				ps.setBinaryStream(3, photoStream, (int) file.length());
+				ps.setString(4, remarkText.getText());
+				ps.setInt(5, df.getId());
+				ps.executeUpdate();
+				System.out.println("Added");
+
+				conn.close();
+			} catch (Exception e) {
+				System.err.println("Got an exception! ");
+
+				e.printStackTrace();
+			}
+		}
 		System.out.println("Edit successfully");
 	}
 
