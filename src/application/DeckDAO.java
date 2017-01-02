@@ -139,16 +139,16 @@ public class DeckDAO {
 		}
 	}
 
-	public static ObservableList<DeckFull> deckDetail(String order) throws SQLException, ClassNotFoundException {
+	public static ObservableList<DeckFull> bidderDeckDetail(String order, int bidderID) throws SQLException, ClassNotFoundException {
 		String originalStmt =
-				"SELECT d.ID, o.ID as OfferID, d.Name, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date, d.WinningOffer FROM Deck d LEFT JOIN Offer o on d.WinningOffer = o.ID left join Bidder b on o.BidderID = b.ID ";
+				"SELECT d.ID, o.ID as OfferID, d.Name, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date, d.WinningOffer FROM Offer o INNER JOIN Bidder b on o.BidderID = b.ID INNER JOIN Deck d on d.ID = o.DeckID where o.BidderID = "+bidderID+" ";
 		String selectStmt = null;
 
 		switch(order){
-		case "Earliest added": selectStmt = originalStmt; break;
-		case "Latest added": selectStmt = originalStmt + "ORDER BY d.ID DESC"; break;
-		case "Oldest first": selectStmt = originalStmt + "ORDER BY o.Date ASC"; break;
 		case "Newest first": selectStmt = originalStmt + "ORDER BY o.Date DESC"; break;
+		case "Oldest first": selectStmt = originalStmt + "ORDER BY o.Date ASC"; break;
+		case "Most expensive": selectStmt = originalStmt + "ORDER BY o.Price DESC"; break;
+		case "Cheapest": selectStmt = originalStmt + "ORDER BY o.Price ASC"; break;
 		case "A > Z": selectStmt = originalStmt + "ORDER BY d.Name ASC"; break;
 		case "Z > A": selectStmt = originalStmt + "ORDER BY d.Name DESC"; break;
 		}
@@ -168,7 +168,68 @@ public class DeckDAO {
 		}
 	}
 
-	public static ObservableList<DeckFull> search(String searchWord, String order) throws SQLException, ClassNotFoundException {
+	public static ObservableList<DeckFull> bidderDeckDetailSearch(String searchWord, String order, int bidderID) throws SQLException, ClassNotFoundException {
+		String originalStmt =
+				"SELECT d.ID, o.ID as OfferID, d.Name, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date, d.WinningOffer FROM Offer o INNER JOIN Bidder b on o.BidderID = b.ID INNER JOIN Deck d on d.ID = o.DeckID where o.BidderID = "+bidderID+" "
+						+"AND d.Name LIKE '%"+searchWord+"%' ";
+		String selectStmt = null;
+
+		switch(order){
+		case "Newest first": selectStmt = originalStmt + "ORDER BY o.Date DESC"; break;
+		case "Oldest first": selectStmt = originalStmt + "ORDER BY o.Date ASC"; break;
+		case "Most expensive": selectStmt = originalStmt + "ORDER BY o.Price DESC"; break;
+		case "Cheapest": selectStmt = originalStmt + "ORDER BY o.Price ASC"; break;
+		case "A > Z": selectStmt = originalStmt + "ORDER BY d.Name ASC"; break;
+		case "Z > A": selectStmt = originalStmt + "ORDER BY d.Name DESC"; break;
+		}
+
+		//Execute SELECT statement
+		try {
+			//Get ResultSet from dbExecuteQuery method
+			ResultSet rsDeck = DBUtil.dbExecuteQuery(selectStmt);
+
+			ObservableList<DeckFull> deckList = getDeckFullList(rsDeck);
+
+			return deckList;
+		} catch (SQLException e) {
+			System.out.println("While sorting all decks infomation, an error occurred: " + e);
+			//Return exception
+			throw e;
+		}
+	}
+
+	public static ObservableList<DeckFull> deckDetail(String order) throws SQLException, ClassNotFoundException {
+		String originalStmt =
+				"SELECT d.ID, o.ID as OfferID, d.Name, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date, d.WinningOffer FROM Deck d LEFT JOIN Offer o on d.WinningOffer = o.ID left join Bidder b on o.BidderID = b.ID ";
+		String selectStmt = null;
+
+		switch(order){
+		case "Earliest added": selectStmt = originalStmt; break;
+		case "Latest added": selectStmt = originalStmt + "ORDER BY d.ID DESC"; break;
+		case "Oldest first": selectStmt = originalStmt + "ORDER BY o.Date ASC"; break;
+		case "Newest first": selectStmt = originalStmt + "ORDER BY o.Date DESC"; break;
+		case "Most expensive": selectStmt = originalStmt + "ORDER BY o.Price DESC"; break;
+		case "Cheapest": selectStmt = originalStmt + "ORDER BY o.Price ASC"; break;
+		case "A > Z": selectStmt = originalStmt + "ORDER BY d.Name ASC"; break;
+		case "Z > A": selectStmt = originalStmt + "ORDER BY d.Name DESC"; break;
+		}
+
+		//Execute SELECT statement
+		try {
+			//Get ResultSet from dbExecuteQuery method
+			ResultSet rsDeck = DBUtil.dbExecuteQuery(selectStmt);
+
+			ObservableList<DeckFull> deckList = getDeckFullList(rsDeck);
+
+			return deckList;
+		} catch (SQLException e) {
+			System.out.println("While sorting all decks infomation, an error occurred: " + e);
+			//Return exception
+			throw e;
+		}
+	}
+
+	public static ObservableList<DeckFull> deckDetailSearch(String searchWord, String order) throws SQLException, ClassNotFoundException {
 		String originalStmt =
 				"SELECT d.ID, d.Name, o.ID as OfferID, d.DeckCondition, d.Image, d.Remark, o.Price, o.BidderID, b.Name as BidderName, o.Date, d.WinningOffer FROM Deck d LEFT JOIN Offer o on d.WinningOffer = o.ID left join Bidder b on o.BidderID = b.ID "
 						+"WHERE(d.Name LIKE '%"+searchWord+"%' OR b.Name LIKE '%"+searchWord+"%')";
@@ -180,6 +241,8 @@ public class DeckDAO {
 		case "Latest added": selectStmt = originalStmt + "ORDER BY d.ID DESC"; break;
 		case "Oldest first": selectStmt = originalStmt + "ORDER BY o.Date ASC"; break;
 		case "Newest first": selectStmt = originalStmt + "ORDER BY o.Date DESC"; break;
+		case "Most expensive": selectStmt = originalStmt + "ORDER BY o.Price DESC"; break;
+		case "Cheapest": selectStmt = originalStmt + "ORDER BY o.Price ASC"; break;
 		case "A > Z": selectStmt = originalStmt + "ORDER BY d.Name ASC"; break;
 		case "Z > A": selectStmt = originalStmt + "ORDER BY d.Name DESC"; break;
 		}

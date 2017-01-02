@@ -29,18 +29,16 @@ public class PlayAround {
 			File file = new File("/Users/shenghaolu/Downloads/browngn.jpg");
 			FileInputStream photoStream = new FileInputStream ( file.getAbsolutePath() );
 			Statement stmt = conn.createStatement();
+			 ResultSet rs = null;
 			String updateStmt =
-					"INSERT INTO Deck\n" +
-							"(Name, DeckCondition, Image, Remark)\n" +
-							"VALUES\n" +
-							"(?, ?, ?, ?)";
-			PreparedStatement ps = conn.prepareStatement(updateStmt);
-			ps.setString(1, "Golden nugget brown");
-			ps.setInt(2, 5);
-			ps.setBinaryStream(3, photoStream, (int) file.length());
-			ps.setString(4, "wrap");
-			ps.executeUpdate();
-			System.out.println("Added");
+					"SELECT o.ID as OfferID, o.Price, o.BidderID, b.Name as BidderName, o.Date FROM Offer o INNER JOIN Bidder b on o.BidderID = b.ID INNER JOIN Deck d on d.ID = o.DeckID where o.BidderID = 1 ";
+			 rs = stmt.executeQuery(updateStmt);
+			while(rs.next()){
+				System.out.println(rs.getInt("OfferID"));
+				System.out.println(rs.getString("BidderName"));
+				System.out.println(rs.getDouble("Price"));
+				System.out.println("===========");
+			}
 
 			conn.close();
 		} catch (Exception e) {

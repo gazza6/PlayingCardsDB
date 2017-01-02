@@ -59,7 +59,7 @@ public class IndexController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// sort by id, date, by name
-		sortBox.getItems().setAll("Latest added", "Earliest added", "Oldest first", "Newest first", "A > Z", "Z > A");
+		sortBox.getItems().setAll("Newest first", "Oldest first", "Latest added", "Earliest added", "Most expensive", "Cheapest", "A > Z", "Z > A");
 		sortBox.getSelectionModel().selectFirst();
 
 		scroller.setFitToWidth(true);
@@ -116,7 +116,7 @@ public class IndexController implements Initializable {
 		} else {
 			searchMode = true;
 		}
-		ObservableList<DeckFull> decks = DeckDAO.search(searchWord, sortBox.getSelectionModel().getSelectedItem().toString());
+		ObservableList<DeckFull> decks = DeckDAO.deckDetailSearch(searchWord, sortBox.getSelectionModel().getSelectedItem().toString());
 		fill(decks);
 	}
 

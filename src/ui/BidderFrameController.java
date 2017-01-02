@@ -74,7 +74,7 @@ public class BidderFrameController implements Initializable{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("BidderDeckIndex.fxml"));
 		AnchorPane flowPane = loader.load();
 		BidderDeckIndexController controller = loader.getController();
-		controller.bidderAllOffers(this.bidder);
+		controller.SetValue(this.bidder);
 		BorderPane border = Start.getRoot();
 		border.setCenter(flowPane);
 	}
