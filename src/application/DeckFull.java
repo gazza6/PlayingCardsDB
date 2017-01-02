@@ -24,16 +24,29 @@ public class DeckFull extends Deck{
 	private SimpleObjectProperty<InputStream> image;
 	private StringProperty remark;
 
+	private IntegerProperty offerId;
+
 	DeckFull(){
 		this.price = new SimpleDoubleProperty();
 		this.bidderName = new SimpleStringProperty();
 		this.date = new SimpleObjectProperty<>();
-
+		this.offerId = new SimpleIntegerProperty();
 		this.id = new SimpleIntegerProperty();
 		this.name = new SimpleStringProperty();
 		this.deckCondition = new SimpleIntegerProperty();
 		this.remark = new SimpleStringProperty();
 		this.image = new SimpleObjectProperty();
+	}
+
+	// id
+	public int getOfferId() {
+		return offerId.get();
+	}
+	public void setOfferId(int offerId) {
+		this.offerId.set(offerId);
+	}
+	public IntegerProperty offerIdProperty(){
+		return offerId;
 	}
 
 	// bidderID

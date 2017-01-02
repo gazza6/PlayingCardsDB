@@ -30,8 +30,6 @@ import javafx.fxml.Initializable;
 
 public class IndexController implements Initializable {
 
-	Stage prevStage;
-
 	@FXML
 	private ComboBox<String> sortBox;
 
@@ -51,10 +49,6 @@ public class IndexController implements Initializable {
 	ScrollPane scroller = new ScrollPane(deckBox);
 	
 	private Boolean searchMode = false;
-
-	public void setPrevStage(Stage stage) {
-		this.prevStage = stage;
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

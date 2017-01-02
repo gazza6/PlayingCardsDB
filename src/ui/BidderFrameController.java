@@ -3,6 +3,8 @@ package ui;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Bidder;
@@ -52,7 +54,6 @@ public class BidderFrameController implements Initializable{
 		remarkArea.setText(bidder.getRemark());
 		bidPlacedLabel.setText(String.valueOf(allOffer));
 		bidWonLabel.setText(String.valueOf(winningOffer));
-		
 		this.bidder = bidder;
 	}
 	

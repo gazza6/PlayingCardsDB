@@ -105,13 +105,14 @@ public class DeckDAO {
 			deck.setImage(rs.getBinaryStream("Image"));
 			deck.setRemark(rs.getString("Remark"));
 			deck.setWinningOffer(rs.getInt("WinningOffer"));
-
+			deck.setOfferId(rs.getInt("OfferID"));
 			//Add employee to the ObservableList
 			deckList.add(deck);
 		}
 		//return empList (ObservableList of Employees)
 		return deckList;
 	}
+	
 
 	//*************************************
 	//Update a deck
@@ -158,9 +159,7 @@ public class DeckDAO {
 		try {
 			//Get ResultSet from dbExecuteQuery method
 			ResultSet rsDeck = DBUtil.dbExecuteQuery(selectStmt);
-
 			ObservableList<DeckFull> deckList = getDeckFullList(rsDeck);
-
 			return deckList;
 		} catch (SQLException e) {
 			System.out.println("While sorting all decks infomation, an error occurred: " + e);
@@ -188,9 +187,7 @@ public class DeckDAO {
 		try {
 			//Get ResultSet from dbExecuteQuery method
 			ResultSet rsDeck = DBUtil.dbExecuteQuery(selectStmt);
-
 			ObservableList<DeckFull> deckList = getDeckFullList(rsDeck);
-
 			return deckList;
 		} catch (SQLException e) {
 			System.out.println("While sorting all decks infomation, an error occurred: " + e);

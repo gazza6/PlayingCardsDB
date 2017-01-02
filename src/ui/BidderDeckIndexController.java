@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Bidder;
@@ -27,9 +28,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class BidderDeckIndexController implements Initializable{
-
-	Stage prevStage;
-
+	
 	@FXML
 	private Label nameLabel;
 
@@ -54,10 +53,6 @@ public class BidderDeckIndexController implements Initializable{
 
 	@FXML
 	ScrollPane scroller = new ScrollPane(deckBox);
-
-	public void setPrevStage(Stage stage) {
-		this.prevStage = stage;
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -134,9 +129,12 @@ public class BidderDeckIndexController implements Initializable{
 			if(i % 2 == 0){
 				flowPane.setStyle("-fx-background-color: #D7DBDD");
 			}
-//			if(deck.getWinningOffer() == deck.get){
-//				
-//			}
+			if(deck.getWinningOffer() == deck.getOfferId()){
+				flowPane.setStyle("-fx-background-color: #F6AA3D");
+			}
+			System.out.println(deck.getWinningOffer());
+			System.out.println(deck.getOfferId());
+			System.out.println("=====");
 			// Get the Controller from the FXMLLoader
 			DeckFrameController controller = loader.getController();
 			// Set data in the controller

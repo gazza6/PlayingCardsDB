@@ -93,7 +93,7 @@ public class BidderDAO {
     }
     
     public static ResultSet bidAllOffers(Bidder bidder) throws SQLException, ClassNotFoundException {
-    	  String selectStmt = "SELECT COUNT(*) AS Total FROM Offer WHERE BidderID = " +bidder.getId();
+    	  String selectStmt = "SELECT COUNT(*) as Total FROM Offer WHERE BidderID = " +bidder.getId();
     	  
     	//Execute SELECT statement
           try {
@@ -108,7 +108,7 @@ public class BidderDAO {
     }
     
 public static ResultSet bidWinningOffers(Bidder bidder) throws SQLException, ClassNotFoundException {
-	  String selectStmt = "SELECT COUNT(*) AS Total FROM Deck d LEFT JOIN Offer o on d.WinningOffer = o.ID WHERE o.BidderID = "+bidder.getId();
+	  String selectStmt = "SELECT COUNT(*) as Total FROM Deck d LEFT JOIN Offer o on d.WinningOffer = o.ID WHERE o.BidderID = "+bidder.getId();
 	  
 	//Execute SELECT statement
       try {

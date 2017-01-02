@@ -27,8 +27,6 @@ import javafx.stage.Stage;
 
 public class BidderIndexController implements Initializable{
 
-	Stage prevStage;
-
 	@FXML
 	private Label nameLabel;
 
