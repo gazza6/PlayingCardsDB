@@ -105,5 +105,9 @@ public class DeckFrameController {
 		BorderPane border = Start.getRoot();
 		border.setCenter(flowPane);
 	}
+	
+	public void editDisable() throws IOException {
+		editButton.setDisable(true);
+	}
 
 }

@@ -131,14 +131,17 @@ public class BidderDeckIndexController implements Initializable{
 		for(DeckFull deck : decks){
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("DeckFrame.fxml"));
 			AnchorPane flowPane = loader.load();
-
 			if(i % 2 == 0){
 				flowPane.setStyle("-fx-background-color: #D7DBDD");
 			}
+//			if(deck.getWinningOffer() == deck.get){
+//				
+//			}
 			// Get the Controller from the FXMLLoader
 			DeckFrameController controller = loader.getController();
 			// Set data in the controller
 			controller.setValues(deck);
+			controller.editDisable();
 			deckBox.getChildren().add(flowPane);
 			i++;
 		}

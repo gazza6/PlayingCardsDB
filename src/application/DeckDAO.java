@@ -105,6 +105,7 @@ public class DeckDAO {
 			deck.setImage(rs.getBinaryStream("Image"));
 			deck.setRemark(rs.getString("Remark"));
 			deck.setWinningOffer(rs.getInt("WinningOffer"));
+
 			//Add employee to the ObservableList
 			deckList.add(deck);
 		}
