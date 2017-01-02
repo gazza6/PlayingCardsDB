@@ -65,7 +65,7 @@ public class DeckFrameController {
 		this.prevStage = stage;
 	}
 
-	public void setValues(DeckFull df){
+	public void setValues(DeckFull df) throws IOException{
 		this.deckFull = df;
 		deckNameLabel.setText(df.getName());
 		priceLabel.setText(String.valueOf(df.getPrice()));
@@ -76,8 +76,8 @@ public class DeckFrameController {
 		if(imgStream != null){
 			Image image = new Image(imgStream);
 			imageView.setImage(image);
+			imgStream.reset();
 		}
-		
 		remarkArea.setText(df.getRemark());
 	}
 

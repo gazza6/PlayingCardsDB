@@ -41,6 +41,7 @@ public class BidHistoryController implements Initializable{
 		if(imgStream != null){
 			Image image = new Image(imgStream);
 			imageView.setImage(image);
+			imgStream.reset();
 		}
 		int i = 0;
 

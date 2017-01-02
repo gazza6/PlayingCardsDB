@@ -81,7 +81,7 @@ public class EditDeckController implements Initializable{
 
 	}
 
-	public void setValues(DeckFull df){
+	public void setValues(DeckFull df) throws IOException{
 		this.df = df;
 		deckText.setText(df.getName());
 		priceText.setText(String.valueOf(df.getPrice()));
@@ -91,9 +91,9 @@ public class EditDeckController implements Initializable{
 		datePicker.setValue(df.getDate().toLocalDate());
 		InputStream imgStream = df.getImage(); 
 		if(imgStream != null){
-			Image image = new Image(imgStream);
-			//Image image = new Image("file:/Users/shenghaolu/Downloads/browngn.jpg");			
+			Image image = new Image(imgStream);		
 			imageView.setImage(image);
+			imgStream.reset();
 		}
 
 	}
