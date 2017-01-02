@@ -49,6 +49,8 @@ public class IndexController implements Initializable {
 
 	@FXML
 	ScrollPane scroller = new ScrollPane(deckBox);
+	
+	private Boolean searchMode = false;
 
 	public void setPrevStage(Stage stage) {
 		this.prevStage = stage;
@@ -59,7 +61,7 @@ public class IndexController implements Initializable {
 		// sort by id, date, by name
 		sortBox.getItems().setAll("Latest added", "Earliest added", "Oldest first", "Newest first", "A > Z", "Z > A");
 		sortBox.getSelectionModel().selectFirst();
-		
+
 		scroller.setFitToWidth(true);
 		try {
 			fillDecks(sortBox.getSelectionModel().getSelectedItem().toString());
@@ -73,41 +75,51 @@ public class IndexController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		 sortBox.valueProperty().addListener(new ChangeListener<String>() {
-		        @Override public void changed(ObservableValue ov, String t, String t1) {
-		        	try {
-						fillDecks(t1);
-					} catch (ClassNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 
-		        }    
-		    });
-		
+		sortBox.valueProperty().addListener(new ChangeListener<String>() {
+			@Override public void changed(ObservableValue ov, String t, String t1) {
+				try {
+					if(searchMode == true){
+						search();
+					} else {
+						fillDecks(t1);
+					}
+					
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}    
+		});
+
 	}
-	
+
 	private void fillDecks(String order) throws SQLException, IOException, ClassNotFoundException{
 		deckBox.getChildren().clear();
 		ObservableList<DeckFull> decks = DeckDAO.deckDetail(order);
 		fill(decks);
 	}
-	
+
 	@FXML
 	private void search() throws ClassNotFoundException, SQLException, IOException{
 		deckBox.getChildren().clear();
 		String searchWord = searchField.getText();
-		ObservableList<DeckFull> decks = DeckDAO.search(searchWord);
+		if(searchWord == ""){
+			searchMode = false;
+		} else {
+			searchMode = true;
+		}
+		ObservableList<DeckFull> decks = DeckDAO.search(searchWord, sortBox.getSelectionModel().getSelectedItem().toString());
 		fill(decks);
 	}
-	
+
 	private void fill(ObservableList<DeckFull> decks) throws SQLException, IOException, ClassNotFoundException{
 		int i = 0;
 		for(DeckFull d : decks){

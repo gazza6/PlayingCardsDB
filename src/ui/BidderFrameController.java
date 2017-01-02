@@ -25,6 +25,12 @@ public class BidderFrameController implements Initializable{
 	
 	@FXML
 	private Label bidderNameLabel;
+	
+	@FXML
+	private Label bidWonLabel;
+	
+	@FXML
+	private Label bidPlacedLabel;
 
 	@FXML
 	private TextArea remarkArea;
@@ -65,7 +71,6 @@ public class BidderFrameController implements Initializable{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("BidderDeckIndex.fxml"));
 		AnchorPane flowPane = loader.load();
 		BidderDeckIndexController controller = loader.getController();
-		// Set data in the controller
 		controller.bidderAllOffers(this.bidder);
 		BorderPane border = Start.getRoot();
 		border.setCenter(flowPane);

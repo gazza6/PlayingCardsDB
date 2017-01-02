@@ -8,23 +8,43 @@
 
 <AnchorPane fx:id="pane" prefHeight="120.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.BidderFrameController">
    <children>
-      <Label layoutX="31.0" layoutY="52.0" text="Name:" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="50.0">
+      <Label layoutX="36.0" layoutY="23.0" text="Name:" AnchorPane.leftAnchor="36.0" AnchorPane.topAnchor="23.0">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="bidderNameLabel" layoutX="98.0" layoutY="53.0" prefHeight="17.0" prefWidth="150.0" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="50.0">
+      <Label fx:id="bidderNameLabel" layoutX="111.0" layoutY="22.0" prefHeight="17.0" prefWidth="150.0" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="22.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="257.0" layoutY="52.0" text="Remark:">
+      <Label layoutX="28.0" layoutY="71.0" text="Remark:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <Button fx:id="detailButton" layoutX="616.0" layoutY="69.0" mnemonicParsing="false" onAction="#bidderOffers" text="Offers" />
       <Button fx:id="editButton" layoutX="622.0" layoutY="20.0" mnemonicParsing="false" onAction="#editBidder" text="Edit" />
-      <TextArea fx:id="remarkArea" layoutX="342.0" layoutY="39.0" prefHeight="50.0" prefWidth="200.0" />
+      <TextArea fx:id="remarkArea" layoutX="111.0" layoutY="58.0" prefHeight="50.0" prefWidth="200.0" />
+      <Label layoutX="381.0" layoutY="25.0" text="Bid Won:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="381.0" layoutY="75.0" text="Bid placed:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="bidWonLabel" layoutX="488.0" layoutY="24.0" prefWidth="50.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="bidPlacedLabel" layoutX="488.0" layoutY="74.0" prefWidth="50.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
