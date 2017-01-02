@@ -37,6 +37,9 @@ public class BidderDeckIndexController implements Initializable{
 	private Button searchButton;
 
 	@FXML
+	private Button backButton;
+
+	@FXML
 	private VBox deckBox = new VBox();
 	
 	private Bidder bidder;

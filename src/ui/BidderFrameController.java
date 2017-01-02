@@ -47,9 +47,12 @@ public class BidderFrameController implements Initializable{
 		this.prevStage = stage;
 	}
 
-	public void setValues(Bidder bidder) throws SQLException{
+	public void setValues(Bidder bidder, int allOffer, int winningOffer) throws SQLException{
 		bidderNameLabel.setText(bidder.getName());
 		remarkArea.setText(bidder.getRemark());
+		bidPlacedLabel.setText(String.valueOf(allOffer));
+		bidWonLabel.setText(String.valueOf(winningOffer));
+		
 		this.bidder = bidder;
 	}
 	

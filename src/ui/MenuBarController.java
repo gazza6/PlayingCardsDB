@@ -43,13 +43,15 @@ public class MenuBarController {
 	
 	@FXML
 	void switchToViewBidder(ActionEvent event) throws IOException, SQLException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("BidderIndex.fxml"));
-		AnchorPane pane = loader.load();
-		BidderIndexController controller = loader.getController();
-		// Set data in the controller
-		controller.setBidderValue();
-		BorderPane border = Start.getRoot();
-		border.setCenter(pane);
+//		FXMLLoader loader = new FXMLLoader(getClass().getResource("BidderIndex.fxml"));
+//		AnchorPane pane = loader.load();
+//		BidderIndexController controller = loader.getController();
+//		// Set data in the controller
+//		controller.setBidderValue();
+//		BorderPane border = Start.getRoot();
+//		border.setCenter(pane);
+		
+		switchPane("BidderIndex.fxml");
 	}
 	
 	private void switchPane(String url) throws IOException{

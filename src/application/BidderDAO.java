@@ -71,7 +71,7 @@ public class BidderDAO {
 	//*******************************
     //SELECT Bidders
     //*******************************
-    public static ObservableList<Bidder> searchBidders() throws SQLException, ClassNotFoundException {
+    public static ObservableList<Bidder> allBidders() throws SQLException, ClassNotFoundException {
         //Declare a SELECT statement
         String selectStmt = "SELECT * FROM Bidder";
 
@@ -91,6 +91,36 @@ public class BidderDAO {
             throw e;
         }
     }
+    
+    public static ResultSet bidAllOffers(Bidder bidder) throws SQLException, ClassNotFoundException {
+    	  String selectStmt = "SELECT COUNT(*) AS Total FROM Offer WHERE BidderID = " +bidder.getId();
+    	  
+    	//Execute SELECT statement
+          try {
+              //Get ResultSet from dbExecuteQuery method
+              ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
+              return rs;
+          } catch (SQLException e) {
+              System.out.println("SQL select operation has been failed: " + e);
+              //Return exception
+              throw e;
+          }
+    }
+    
+public static ResultSet bidWinningOffers(Bidder bidder) throws SQLException, ClassNotFoundException {
+	  String selectStmt = "SELECT COUNT(*) AS Total FROM Deck d LEFT JOIN Offer o on d.WinningOffer = o.ID WHERE o.BidderID = "+bidder.getId();
+	  
+	//Execute SELECT statement
+      try {
+          //Get ResultSet from dbExecuteQuery method
+          ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
+          return rs;
+      } catch (SQLException e) {
+          System.out.println("SQL select operation has been failed: " + e);
+          //Return exception
+          throw e;
+      }
+    }
 
 	//Select * from employees operation
 	private static ObservableList<Bidder> getBidderList(ResultSet rs) throws SQLException, ClassNotFoundException {
@@ -108,6 +138,55 @@ public class BidderDAO {
 		}
 		//return empList (ObservableList of Employees)
 		return bidderList;
+	}
+	
+	public static ObservableList<Bidder> bidderDetail(String order) throws SQLException, ClassNotFoundException {
+		String originalStmt =
+				"SELECT * FROM Bidder ";
+
+		String selectStmt = null;
+
+		switch(order){
+		case "A > Z": selectStmt = originalStmt + "ORDER BY Bidder.Name ASC"; break;
+		case "Z > A": selectStmt = originalStmt + "ORDER BY Bidder.Name DESC"; break;
+		}
+		//Execute SELECT statement
+		try {
+			//Get ResultSet from dbExecuteQuery method
+			ResultSet rsDeck = DBUtil.dbExecuteQuery(selectStmt);
+			ObservableList<Bidder> bidderList = getBidderList(rsDeck);
+
+			return bidderList;
+		} catch (SQLException e) {
+			System.out.println("While searching for all decks infomation, an error occurred: " + e);
+			//Return exception
+			throw e;
+		}
+	}
+	
+	public static ObservableList<Bidder> search(String searchWord, String order) throws SQLException, ClassNotFoundException {
+		String originalStmt =
+				"SELECT * FROM Bidder "
+						+"WHERE(Bidder.Name LIKE '%"+searchWord+"%') ";
+
+		String selectStmt = null;
+
+		switch(order){
+		case "A > Z": selectStmt = originalStmt + "ORDER BY Bidder.Name ASC"; break;
+		case "Z > A": selectStmt = originalStmt + "ORDER BY Bidder.Name DESC"; break;
+		}
+		//Execute SELECT statement
+		try {
+			//Get ResultSet from dbExecuteQuery method
+			ResultSet rsDeck = DBUtil.dbExecuteQuery(selectStmt);
+			ObservableList<Bidder> bidderList = getBidderList(rsDeck);
+
+			return bidderList;
+		} catch (SQLException e) {
+			System.out.println("While searching for all decks infomation, an error occurred: " + e);
+			//Return exception
+			throw e;
+		}
 	}
 	
 	//*************************************
