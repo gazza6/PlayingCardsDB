@@ -57,6 +57,7 @@ public class IndexController implements Initializable {
 		sortBox.getSelectionModel().selectFirst();
 
 		scroller.setFitToWidth(true);
+		scroller.setFitToHeight(true);
 		try {
 			fillDecks(sortBox.getSelectionModel().getSelectedItem().toString());
 		} catch (SQLException e) {

@@ -52,7 +52,7 @@ public class DeckDAO {
 	//*******************************
 	public static ObservableList<Deck> searchDecks() throws SQLException, ClassNotFoundException {
 		//Declare a SELECT statement
-		String selectStmt = "SELECT * FROM Deck";
+		String selectStmt = "SELECT * FROM Deck" +" ORDER BY Deck.Name ASC";
 
 		//Execute SELECT statement
 		try {

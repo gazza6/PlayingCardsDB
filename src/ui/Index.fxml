@@ -18,10 +18,11 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </TextField>
-      <ScrollPane fx:id="scroller" layoutX="-14.0" layoutY="64.0" prefHeight="636.0" prefWidth="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <content>
-            <VBox fx:id="deckBox" prefHeight="636.0" prefWidth="680.0" />
-         </content></ScrollPane>
       <Button fx:id="searchButton" layoutX="408.0" layoutY="25.0" mnemonicParsing="false" onAction="#search" text="Search" AnchorPane.leftAnchor="408.0" AnchorPane.topAnchor="25.0" />
+      <ScrollPane fx:id="scroller" prefHeight="630.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <content>
+            <VBox fx:id="deckBox" prefHeight="630.0" prefWidth="700.0" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

@@ -58,7 +58,7 @@ public class DeckFrameController {
 
 	@FXML
 	private ImageView imageView;
-	
+
 	private DeckFull deckFull;
 
 	public void setPrevStage(Stage stage) {
@@ -87,7 +87,7 @@ public class DeckFrameController {
 		AnchorPane flowPane = fxmlLoader.load();
 		BidHistoryController controller = fxmlLoader.getController();
 		controller.setValue(deckFull);
-		
+
 		Stage stage = new Stage();
 		stage.setTitle("Bid history");
 		stage.setScene(new Scene(flowPane));  
@@ -105,9 +105,22 @@ public class DeckFrameController {
 		BorderPane border = Start.getRoot();
 		border.setCenter(flowPane);
 	}
-	
+
 	public void editDisable() throws IOException {
 		editButton.setDisable(true);
+	}
+
+	@FXML
+	public void deckInfo() throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("DeckInformation.fxml"));
+		AnchorPane flowPane = loader.load();
+
+		DeckInformationController controller = loader.getController();
+		// Set data in the controller
+		controller.setDeckName(deckFull.getName());
+		BorderPane border = Start.getRoot();
+		border.setCenter(flowPane);
 	}
 
 }
