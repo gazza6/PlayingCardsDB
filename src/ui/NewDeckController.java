@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Bidder;
@@ -72,9 +73,9 @@ public class NewDeckController implements Initializable {
 		conditionCombo.getItems().setAll("5", "4", "3", "2", "1");
 		conditionCombo.getSelectionModel().selectFirst();
 		try {
-			ObservableList<Deck> decks = DeckDAO.searchDecks();
-			for(Deck d : decks){
-				deckCombo.getItems().add(d.getName());
+			List<String> decks = DeckDAO.disntinctDeckName();
+			for(String s : decks){
+				deckCombo.getItems().add(s);
 			}
 
 		} catch (Exception e) {
@@ -116,7 +117,7 @@ public class NewDeckController implements Initializable {
 		try {
 
 			if(photoStream == null){
-			DeckDAO.insertDeck(deckText.getText(), conditionCombo.getSelectionModel().getSelectedItem().toString(), photoStream, remarkText.getText());
+			DeckDAO.insertDeck(deckText.getText(), conditionCombo.getSelectionModel().getSelectedItem().toString(), remarkText.getText());
 			} else {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  

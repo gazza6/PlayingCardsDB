@@ -20,7 +20,7 @@
       <Menu mnemonicParsing="false" text="View">
          <items>
             <MenuItem mnemonicParsing="false" onAction="#switchToIndex" text="Decks" />
-            <MenuItem mnemonicParsing="false" text="Offers" />
+            <MenuItem mnemonicParsing="false" onAction="#switchToDeckInfo" text="Deck Info" />
             <MenuItem fx:id="viewBidder" mnemonicParsing="false" onAction="#switchToViewBidder" text="Bidders" />
          </items>
       </Menu>

@@ -3,6 +3,8 @@ package application;
 import java.io.FileInputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -50,17 +52,19 @@ public class DeckDAO {
 	//*******************************
 	//SELECT Decks
 	//*******************************
-	public static ObservableList<Deck> searchDecks() throws SQLException, ClassNotFoundException {
+	public static List<String> disntinctDeckName() throws SQLException, ClassNotFoundException {
 		//Declare a SELECT statement
-		String selectStmt = "SELECT * FROM Deck" +" ORDER BY Deck.Name ASC";
-
+		String selectStmt = "SELECT DISTINCT Deck.Name FROM Deck" +" ORDER BY Deck.Name ASC";
+		List<String> deckList = new ArrayList<String>();
 		//Execute SELECT statement
 		try {
 			//Get ResultSet from dbExecuteQuery method
 			ResultSet rsDecks = DBUtil.dbExecuteQuery(selectStmt);
 
 			//Send ResultSet to the getEmployeeList method and get employee object
-			ObservableList<Deck> deckList = getDeckList(rsDecks);
+			while(rsDecks.next()){
+				deckList.add(rsDecks.getString("Name"));
+			}
 
 			//Return employee object
 			return deckList;
@@ -82,6 +86,41 @@ public class DeckDAO {
 			deck.setName(rs.getString("Name"));
 			deck.setWinningOffer(rs.getInt("WinningOffer"));
 			deck.setDeckCondition(rs.getInt("DeckCondition"));
+			//Add employee to the ObservableList
+			deckList.add(deck);
+		}
+		//return empList (ObservableList of Employees)
+		return deckList;
+	}
+
+	public static ObservableList<DeckFull> searchDeckFull(String deckName) throws SQLException, ClassNotFoundException {
+		String originalStmt =
+				"SELECT d.Name, d.DeckCondition, o.Price, o.Date FROM Deck d LEFT JOIN Offer o on o.ID = d.WinningOffer WHERE d.Name = '" + deckName +"' ORDER BY o.Date ASC";
+
+		//Execute SELECT statement
+		try {
+			//Get ResultSet from dbExecuteQuery method
+			ResultSet rsDeck = DBUtil.dbExecuteQuery(originalStmt);
+			ObservableList<DeckFull> deckList = getSimplifiedDeckFullList(rsDeck);
+			return deckList;
+		} catch (SQLException e) {
+			System.out.println("While sorting all decks infomation, an error occurred: " + e);
+			//Return exception
+			throw e;
+		}
+	}
+
+	//Select * from employees operation
+	private static ObservableList<DeckFull> getSimplifiedDeckFullList(ResultSet rs) throws SQLException, ClassNotFoundException {
+		//Declare a observable List which comprises of Employee objects
+		ObservableList<DeckFull> deckList = FXCollections.observableArrayList();
+
+		while (rs.next()) {
+			DeckFull deck = new DeckFull();
+			deck.setName(rs.getString("Name"));
+			deck.setDeckCondition(rs.getInt("DeckCondition"));
+			deck.setPrice(rs.getDouble("Price"));
+			deck.setDate(rs.getDate("Date"));
 			//Add employee to the ObservableList
 			deckList.add(deck);
 		}
@@ -112,7 +151,7 @@ public class DeckDAO {
 		//return empList (ObservableList of Employees)
 		return deckList;
 	}
-	
+
 
 	//*************************************
 	//Update a deck
@@ -261,7 +300,7 @@ public class DeckDAO {
 	//*************************************
 	//INSERT a deck with no winning bid
 	//*************************************
-	public static void insertDeck (String name, String condition, FileInputStream fin, String remark) throws SQLException, ClassNotFoundException {
+	public static void insertDeck (String name, String condition, String remark) throws SQLException, ClassNotFoundException {
 		//Declare a INSERT statement
 
 		// To do 
@@ -270,7 +309,7 @@ public class DeckDAO {
 				"INSERT INTO Deck\n" +
 						"(Name, DeckCondition, Remark)\n" +
 						"VALUES\n" +
-						"('"+name+"', "+condition+","+fin+", '"+remark+"')";
+						"('"+name+"', "+condition+", '"+remark+"')";
 
 		//Execute DELETE operation
 		try {

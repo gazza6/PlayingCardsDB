@@ -111,7 +111,7 @@ public class DeckFrameController {
 	}
 
 	@FXML
-	public void deckInfo() throws IOException {
+	public void deckInfo() throws IOException, ClassNotFoundException, SQLException {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("DeckInformation.fxml"));
 		AnchorPane flowPane = loader.load();

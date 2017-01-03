@@ -14,18 +14,6 @@ import javafx.scene.layout.BorderPane;
 
 public class MenuBarController {
 
-	@FXML // fx:id="back"
-	private MenuItem back; // Value injected by FXMLLoader
-
-	@FXML // fx:id="addBidder"
-	private MenuItem addBidder; // Value injected by FXMLLoadera
-	
-	@FXML // fx:id="addBidder"
-	private MenuItem addDeck; // Value injected by FXMLLoadera
-	
-	@FXML // fx:id="addBidder"
-	private MenuItem viewBidder; // Value injected by FXMLLoadera
-
 	@FXML
 	void switchToIndex(ActionEvent event) throws IOException {
 		switchPane("Index.fxml");
@@ -39,6 +27,11 @@ public class MenuBarController {
 	@FXML
 	void switchToAddBidder(ActionEvent event) throws IOException {
 		switchPane("NewBidder.fxml");
+	}
+	
+	@FXML
+	void switchToDeckInfo(ActionEvent event) throws IOException {
+		switchPane("DeckInformation.fxml");
 	}
 	
 	@FXML
