@@ -46,7 +46,8 @@ public class NewOfferController {
 
 		System.out.println("Offer added successfully");
 		Stage stage = (Stage) closeButton.getScene().getWindow();
-		stage.close();
+		bidderText.setText("");
+		priceText.setText("");
 	}
 
 }
