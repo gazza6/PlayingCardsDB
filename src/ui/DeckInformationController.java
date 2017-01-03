@@ -4,7 +4,10 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.OptionalDouble;
 import java.util.ResourceBundle;
 
 import application.Deck;
@@ -194,20 +197,46 @@ public class DeckInformationController implements Initializable{
 		chart.getData().clear();
 		XYChart.Series series = new XYChart.Series();
 		series.setName(deckNameLabel.getText());
+		List<Double> priceList = new ArrayList<Double>();
 		for(DeckFull d : decks){
 			if(d.getDate().before(from) || d.getDate().after(until)){
 				continue;
 			}
 			if(condition.equals("Condition All")){
 				series.getData().add(new XYChart.Data(d.getDate().toString(), d.getPrice()));
+				priceList.add(d.getPrice());
 			} else {
 				if(String.valueOf(d.getDeckCondition()).equals(condition)){
 					series.getData().add(new XYChart.Data(d.getDate().toString(), d.getPrice()));
+					priceList.add(d.getPrice());
 				}
 			}
 		}
 		chart.getData().add(series);
+		labelStats(priceList);
+		
+	}
+	
+	private void labelStats(List<Double> priceList){
+		OptionalDouble average = priceList
+	            .stream()
+	            .mapToDouble(a -> a)
+	            .average();
+		averageLabel.setText(String.valueOf(average.getAsDouble()));
 
+		Collections.sort(priceList);
+		
+		double median;
+		int size = priceList.size();
+		if (size % 2 == 0){
+			median = ((double)priceList.get(size/2) + (double)priceList.get(size/2 - 1))/2;
+		} else{
+			median = (double) (double)priceList.get(size/2);
+		}
+		medianLabel.setText(String.valueOf(median));
+		
+		minLabel.setText(String.valueOf(Collections.min(priceList)));
+		maxLabel.setText(String.valueOf(Collections.max(priceList)));
 	}
 
 	private void draw(){
