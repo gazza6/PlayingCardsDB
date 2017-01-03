@@ -1,6 +1,7 @@
 package ui;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import application.Deck;
@@ -62,13 +63,48 @@ public class DeckInformationController implements Initializable{
 		deckNameLabel.setText(name);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		conditionCombo.getItems().setAll("All", "5", "4", "3", "2", "1");
+		conditionCombo.getItems().setAll("Condition All", "5", "4", "3", "2", "1");
 		conditionCombo.getSelectionModel().selectFirst();
 		
-		periodCombo.getItems().setAll("Recent 3 months", "Recent 1 months","Recent 6 months","Recent 1 year","All time");
+		periodCombo.getItems().setAll("Recent 3 months", "Recent 1 months","Recent 6 months","Recent 1 year","All time", "Customise");
 		periodCombo.getSelectionModel().selectFirst();
+		
+		periodCombo.valueProperty().addListener(new ChangeListener<String>() {
+			@Override public void changed(ObservableValue ov, String name, String currentPeriod) {
+				switch(currentPeriod){
+				case "Recent 3 months": 
+					untilDate.setValue(LocalDate.now());
+					fromDate.setValue(untilDate.getValue().minusMonths(3));
+					break;
+				case "Recent 1 months":
+					untilDate.setValue(LocalDate.now());
+					fromDate.setValue(untilDate.getValue().minusMonths(1));
+					break;
+				case "Recent 6 months":
+					untilDate.setValue(LocalDate.now());
+					fromDate.setValue(untilDate.getValue().minusMonths(6));
+					break;
+				case "Recent 1 year": 
+					untilDate.setValue(LocalDate.now());
+					fromDate.setValue(untilDate.getValue().minusYears(1));
+					break;
+				case "All time":
+					untilDate.setValue(LocalDate.now());
+					fromDate.setValue(LocalDate.of(2010, 1, 1));
+					break;
+				case "Customise":
+					untilDate.setValue(null);
+					fromDate.setValue(null);
+					break;
+				}
+			}    
+		});
+		
+		untilDate.setValue(LocalDate.now());
+		fromDate.setValue(untilDate.getValue().minusMonths(3));
 		
 		try {
 			ObservableList<Deck> decks = DeckDAO.searchDecks();
