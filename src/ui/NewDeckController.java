@@ -102,7 +102,7 @@ public class NewDeckController implements Initializable {
 	}
 
 	private void clearFields(){
-		deckText.setText("");
+		//deckText.setText("");
 		priceText.setText("");
 		bidderText.setText("");
 		remarkText.setText("");

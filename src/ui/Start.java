@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -42,6 +43,8 @@ public class Start extends Application {
 		root.setCenter(indexPage);
 
 		Scene scene = new Scene(root, 700, 700);
+//		Image image = new Image("file:images/logo.png");
+//		primaryStage.getIcons().add(image);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
