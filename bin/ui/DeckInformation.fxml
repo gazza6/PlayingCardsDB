@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.DeckInformationController">
+   <children>
+      <ScrollPane pannable="true" prefHeight="700.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="700.0">
+               <children>
+                  <ComboBox fx:id="conditionCombo" layoutX="31.0" layoutY="119.0" prefWidth="150.0" />
+                  <Button fx:id="searchButton" layoutX="456.0" layoutY="23.0" mnemonicParsing="false" text="Search" />
+                  <DatePicker fx:id="fromDate" layoutX="258.0" layoutY="72.0" prefHeight="27.0" prefWidth="150.0" />
+                  <DatePicker fx:id="untilDate" layoutX="456.0" layoutY="72.0" prefHeight="27.0" prefWidth="150.0" />
+                  <TextField fx:id="searchText" layoutX="258.0" layoutY="23.0" promptText="Deck name" />
+                  <ComboBox fx:id="deckCombo" layoutX="31.0" layoutY="61.0" prefWidth="150.0" />
+                  <Label layoutX="425.0" layoutY="74.0" text="to">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="deckNameLabel" layoutX="31.0" layoutY="25.0" prefWidth="200.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="235.0" layoutY="594.0" text="Median" />
+                  <Label layoutX="75.0" layoutY="594.0" text="Average" />
+                  <Label layoutX="553.0" layoutY="594.0" text="Min" />
+                  <Label layoutX="390.0" layoutY="594.0" text="Max" />
+                  <Label fx:id="averageLabel" layoutX="58.0" layoutY="631.0" prefWidth="85.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="maxLabel" layoutX="361.0" layoutY="632.0" prefWidth="85.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="medianLabel" layoutX="215.0" layoutY="631.0" prefWidth="85.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="minLabel" layoutX="522.0" layoutY="631.0" prefWidth="85.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="periodCombo" layoutX="258.0" layoutY="119.0" prefWidth="200.0" />
+                  <LineChart fx:id="chart" layoutX="92.0" layoutY="175.0">
+                    <xAxis>
+                      <CategoryAxis label="Date" side="BOTTOM" fx:id="xAxis" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="yAxis" label="Price" side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
